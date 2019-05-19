@@ -1,0 +1,39 @@
+body {
+    background-color: #f8f9fa !important;
+    color: #5a5a5a;
+}
+
+.blue {
+    background-color: #303C6C
+}
+
+.justify {
+    text-align: justify
+}
+
+.marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.marginTop {
+    margin-top: 10rem
+}
+
+
+
+
