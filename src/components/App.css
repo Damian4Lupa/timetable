@@ -36,4 +36,30 @@ body {
 
 
 
+input.validFrom {
+    padding-right: 30px;
+    padding-left: 25px;
+    background-image: url('./img/from.png');
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: left center;
+}
 
+input.validTo {
+    padding-right: 30px;
+    padding-left: 25px;
+    background-image: url('./img/to.png');
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: left center;
+}
+
+input.validCalendar {
+    padding-right: 5px;
+    padding-left: 25px;
+    text-align: center;
+    background-image: url('./img/calendar.png');
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: left center;
+}

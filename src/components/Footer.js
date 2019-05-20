@@ -1,5 +1,6 @@
 import React from 'react';
-import googleApp from './img/google.png'
+import googlePay from './img/googlepay.png'
+import appStore from './img/appstore.png'
 
 const Footer = () => {
     return (
@@ -40,7 +41,12 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div class="col-3 col-md">
-                            <img src={googleApp} alt="googleApp" height="135" />
+                            <a href="https://play.google.com/store" target="_blank">
+                                <img src={googlePay} alt="googleApp" height="65" />
+                            </a>
+                            <a href="https://www.apple.com/pl/ios/app-store/" target="_blank">
+                                <img src={appStore} alt="googleApp" height="65" />
+                            </a>
                         </div>
                     </div>
                     <div class="text-center text-small font-weight-light mt-5">
