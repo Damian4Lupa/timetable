@@ -37,8 +37,8 @@ body {
 
 
 input.validFrom {
-    padding-right: 30px;
-    padding-left: 25px;
+    padding-right: 10px;
+    padding-left: 40px;
     background-image: url('./img/from.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
@@ -46,8 +46,8 @@ input.validFrom {
 }
 
 input.validTo {
-    padding-right: 30px;
-    padding-left: 25px;
+    padding-right: 10px;
+    padding-left: 40px;
     background-image: url('./img/to.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
@@ -56,10 +56,30 @@ input.validTo {
 
 input.validCalendar {
     padding-right: 5px;
-    padding-left: 25px;
+    padding-left: 40px;
     text-align: center;
     background-image: url('./img/calendar.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
+    background-position: left center;
+}
+
+input.validClock {
+    padding-right: 5px;
+    padding-left: 40px;
+    text-align: center;
+    background-image: url('./img/clock.png');
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: left center;
+}
+
+input.validTime {
+    padding-right: 5px;
+    padding-left: 40px;
+    text-align: center;
+    background-image: url('./img/time.png');
+    background-repeat: no-repeat;
+    background-size: 32px;
     background-position: left center;
 }
