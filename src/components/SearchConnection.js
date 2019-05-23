@@ -16,53 +16,46 @@ class SearchConnection extends Component {
         timeComplete: false,
         dateITimeComplete: false,
 
-        data: []
     }
 
-    handleChangeCompliteStatus = (event) => {
-        if (event.target.name === "date") {
+    // handleChangeCompliteStatus = (event) => {
+    //     if (event.target.name === "date") {
 
-            // this.setState({
-            //     dateComplete: false
-            // })
-        }
-    }
+    //         // this.setState({
+    //         //     dateComplete: false
+    //         // })
+    //     }
+    // }
 
     handleChangeDate = event => {
         const name = event.target.name
         const value = event.target.value
-
         this.setState({
             [name]: value
         })
     }
 
-    // downloadTimetable = () => {
+    downloadTimetable() {
+        const API = `https://infopasazer.intercity.pl/?p=station&id=178662`
 
-    //     const API = "http://jakdojade.pl/api/rest/v1/schedule/table"
+        fetch(API)
+            .then(response => {
 
+                if (response) {
+                    console.log(response)
+                    return response
+                }
+                throw Error(response.status)
 
-    //     fetch(API)
-    //         .then(response => {
+            })
+            .catch(error => alert(`\nEasy, it's just a error \n${error} \nRefresh the page `))
+            .then(response => response.json())
+            .then(data => {
 
-    //             if (response.ok) {
-    //                 return response
-    //             }
-    //             throw Error(response.status)
+                console.log(data)
+            })
 
-    //         })
-    //         .catch(error => alert(`\nEasy, it's just a error \n${error} \nRefresh the page `))
-    //         .then(response => response.json())
-    //         .then(data => {
-
-    //             const info = data
-
-    //             this.setState({
-    //                 data: info
-    //             })
-    //         })
-    // }
-
+    }
 
     render() {
 
@@ -70,7 +63,6 @@ class SearchConnection extends Component {
 
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
-
 
         return (
             <div class="container">
