@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'jquery';
 import './App.css';
 import Header from './Header'
 import SearchConnection from './SearchConnection'

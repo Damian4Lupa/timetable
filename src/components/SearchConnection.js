@@ -13,8 +13,14 @@ class SearchConnection extends Component {
         time: this.minTime,
         dateITime: this.dateITime,
 
-        stationFrom: '',
-        stationTo: '',
+        stationInputFrom: '',
+        stationInputTo: '',
+        selectedLocations: [],
+
+        selectedFrom: '',
+        selectedTo: '',
+        selectedFromCrs: 'STP',
+        selectedToCrs: '',
 
         dateComplete: true,
         timeComplete: false,
@@ -22,11 +28,11 @@ class SearchConnection extends Component {
     }
 
     data = [
-        { location: "Abbey Road", CRS: "ZAL" },
-        { location: "Abbey Wood", CRS: "ABW" },
-        { location: "Abercwmboi", CRS: "ABI" },
-        { location: "Abercynon", CRS: "ACY" },
-        { location: "Aberdour", CRS: "AUR" },
+        { id: 1, location: "Abbey Road", CRS: "ZAL" },
+        { id: 2, location: "Abbey Wood", CRS: "ABW" },
+        { id: 3, location: "Abercwmboi", CRS: "ABI" },
+        { id: 4, location: "Abercynon", CRS: "ACY" },
+        { id: 5, location: "Aberdour", CRS: "AUR" },
         { location: "", CRS: "" },
         { location: "", CRS: "" },
         { location: "", CRS: "" },
@@ -60,13 +66,13 @@ class SearchConnection extends Component {
 
     downloadTimetable = () => {
 
-        const { date, time, } = this.state
+        const { selectedFromCrs, time, } = this.state
         //szablon1 https://developer.transportapi.com/docs?raml=https://transportapi.com/v3/raml/transportapi.raml##request_uk_public_journey_from_from_to_to_type_date_time_json
 
         //szablon2 https://transportapi.com/v3/uk/train/station/STP/2019-05-15/12:20/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger 
 
 
-        const API = `https://transportapi.com/v3/uk/train/station/STP/${this.minDate}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
+        const API = `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${this.minDate}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
 
         // api pobiera liste dla danego przystanku, potem szukanie po destination
 
@@ -100,17 +106,38 @@ class SearchConnection extends Component {
     }
 
 
+    componentDidUpdate(previousProps, previousState) {
+        let inputValue = this.state.stationInputFrom //to co wpisuje w input
+        let station = [...this.data] //punkt wejściowy
+        // console.log(location)
+        let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
+
+        if (previousState.stationInputFrom !== this.state.stationInputFrom) {
+            selectedLocations = station.filter(item => item.location.includes(inputValue))
+
+            this.setState({
+                selectedLocations
+            })
+
+        }
+
+
+
+
+    }
 
     render() {
 
-        const { date, time, dateITime, dateComplete, timeComplete, dateITimeComplete, stationFrom, stationTo } = this.state
+        const { date, time, dateITime, dateComplete, timeComplete, dateITimeComplete, stationInputFrom, stationInputTo } = this.state
 
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
 
-        let handleSearchFrom = this.state.stationFrom.length > 4 ? <SearchFrom search={stationFrom} /> : null
+        let handleSearchFrom = this.state.stationInputFrom.length > 4 ? <SearchFrom stationInputFrom={stationInputFrom} data={this.data} /> : null
 
         // console.log(this.minDate, this.date)
+
+
 
         return (
             <div class="container">
@@ -118,14 +145,23 @@ class SearchConnection extends Component {
 
 
                     <div class="col">
-                        <input name="stationFrom" class="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationFrom} onChange={this.handleChangeData} onClick={handleSearchFrom} />
-                        <select name="selectFrom">
-                            {handleSearchFrom}
-                        </select>
+                        <input name="stationInputFrom" class="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationInputFrom} onChange={this.handleChangeData} onClick={handleSearchFrom} />
+
+
+                        <div class="form-group mt-3">
+
+                            <select class="custom-select custom-select-lg" size="3" >
+                                <option value={this.data.id}>{this.data.location}</option>
+                            </select>
+                        </div>
+
                     </div>
 
+
+                    {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
+
                     <div class="col">
-                        <input name="stationTo" class="validTo form-control form-control-lg" type="text" placeholder="TO" value={stationTo} onChange={this.handleChangeData} />
+                        <input name="stationInputTo" class="validTo form-control form-control-lg" type="text" placeholder="TO" value={stationInputTo} onChange={this.handleChangeData} />
                     </div>
                     <div class="col">
 
