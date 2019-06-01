@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchFrom from './SearchFrom'
+const data = require('./data')
 
 class SearchConnection extends Component {
 
@@ -16,45 +17,22 @@ class SearchConnection extends Component {
         stationInputFrom: '',
         stationInputTo: '',
         selectedLocations: [],
+        selectedLocationsSize: 0,
 
         selectedFrom: '',
         selectedTo: '',
         selectedFromCrs: 'STP',
         selectedToCrs: '',
 
-        dateComplete: true,
-        timeComplete: false,
-        dateITimeComplete: false,
+        flags: {
+            showSelect: true,
+            formIsChanged: true,
+            dateComplete: true,
+            timeComplete: false,
+            dateITimeComplete: false,
+        }
+
     }
-
-    data = [
-        { id: 1, location: "Abbey Road", CRS: "ZAL" },
-        { id: 2, location: "Abbey Wood", CRS: "ABW" },
-        { id: 3, location: "Abercwmboi", CRS: "ABI" },
-        { id: 4, location: "Abercynon", CRS: "ACY" },
-        { id: 5, location: "Aberdour", CRS: "AUR" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-        { location: "", CRS: "" },
-
-    ]
-    // handleChangeCompliteStatus = (event) => {
-    //     if (event.target.name === "date") {
-
-    //         // this.setState({
-    //         //     dateComplete: false
-    //         // })
-    //     }
-    // }
 
     handleChangeData = event => {
         const name = event.target.name
@@ -108,34 +86,83 @@ class SearchConnection extends Component {
 
     componentDidUpdate(previousProps, previousState) {
         let inputValue = this.state.stationInputFrom //to co wpisuje w input
-        let station = [...this.data] //punkt wejściowy
-        // console.log(location)
+        let station = [...data.data] //punkt wejściowy
+
         let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
+
+        let selectedLocationsSize = 0
 
         if (previousState.stationInputFrom !== this.state.stationInputFrom) {
             selectedLocations = station.filter(item => item.location.includes(inputValue))
 
+            if (selectedLocationsSize > 5) {
+                selectedLocationsSize = 5
+            } else if (selectedLocationsSize = 2) {
+                selectedLocationsSize = 2
+            } else {
+                selectedLocationsSize = selectedLocations.length
+            }
+
             this.setState({
-                selectedLocations
+                selectedLocations,
+                selectedLocationsSize
             })
-
         }
-
-
-
-
     }
+
+    handleSearchForm2 = event => {
+        // console.log(event.target.value)
+
+        this.setState({
+            selectedFromCrs: event.target.value
+        })
+    }
+
+    handleSearchForm(id) {
+        if (this.state.formIsChanged) {
+            this.setState({
+                selectedFromCrs: id,
+                formIsChanged: false
+            })
+        }
+    }
+
+    handleSelectedLocationForm2 = event => {
+        console.log(event.target.getAttribute('name'))
+    }
+
+    renderStatusOfFlags = () => {
+        // console.log("działa")
+
+        //zestaw zasad i aktualizacji flag
+    }
+
+
 
     render() {
 
-        const { date, time, dateITime, dateComplete, timeComplete, dateITimeComplete, stationInputFrom, stationInputTo } = this.state
+        const { date, time, dateITime, dateComplete, timeComplete, dateITimeComplete, stationInputFrom, stationInputTo, selectedLocationsSize, selectedLocations } = this.state
 
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
 
-        let handleSearchFrom = this.state.stationInputFrom.length > 4 ? <SearchFrom stationInputFrom={stationInputFrom} data={this.data} /> : null
+        let searchForm = selectedLocations.map(item => (
+            <SearchFrom
+                key={item.id}
+                id={item.id}
+                location={item.location}
+                crs={item.CRS}
+                // name={item.location}
+                chosen={this.handleSearchForm(this, item.id)}
+            />
+        ))
 
-        // console.log(this.minDate, this.date)
+        // let show_SearchFrom = this.state.stationInputFrom.length >= 3 ? searchForm : null
+
+        this.renderStatusOfFlags()
+
+        // show_SelectIHave = this.data.map(item => (
+        //     <SelectIHave key={item.id} id={item.id} title={item.title} chosen={this.handleSelectIHave(this, item.id)} />))
 
 
 
@@ -145,14 +172,21 @@ class SearchConnection extends Component {
 
 
                     <div class="col">
-                        <input name="stationInputFrom" class="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationInputFrom} onChange={this.handleChangeData} onClick={handleSearchFrom} />
+                        <input name="stationInputFrom" class="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationInputFrom} onChange={this.handleChangeData} />
 
 
                         <div class="form-group mt-3">
 
-                            <select class="custom-select custom-select-lg" size="3" >
-                                <option value={this.data.id}>{this.data.location}</option>
-                            </select>
+                            {this.state.flags.showSelect && <select class="custom-select custom-select-lg" size={selectedLocationsSize}
+                                onChange={this.handleSearchForm2}
+                                onClick={this.handleSelectedLocationForm2}
+                            >
+
+                                {searchForm}
+
+                            </select>}
+
+
                         </div>
 
                     </div>
