@@ -14,22 +14,22 @@ class SearchConnection extends Component {
         time: this.minTime,
         dateITime: this.dateITime,
 
-        stationInputFrom: '',
+        stationInputFrom: '', //wartość wpisana w input - wyświetlana wartoś
         stationInputTo: '',
         selectedLocations: [],
-        selectedLocationsSize: 0,
+        selectedLocationsSize: 0, //rozmiar okna selected
 
         selectedFrom: '',
         selectedTo: '',
-        selectedFromCrs: 'STP',
+        selectedFromCrs: '',
         selectedToCrs: '',
 
         flags: {
             showSelect: true,
             formIsChanged: true,
-            dateComplete: true,
+            dateComplete: false,
             timeComplete: false,
-            dateITimeComplete: false,
+            dateITimeComplete: true,
         }
 
     }
@@ -97,7 +97,7 @@ class SearchConnection extends Component {
 
             if (selectedLocationsSize > 5) {
                 selectedLocationsSize = 5
-            } else if (selectedLocationsSize = 2) {
+            } else if (selectedLocationsSize === 2) {
                 selectedLocationsSize = 2
             } else {
                 selectedLocationsSize = selectedLocations.length
@@ -108,6 +108,7 @@ class SearchConnection extends Component {
                 selectedLocationsSize
             })
         }
+
     }
 
     handleSearchForm2 = event => {
@@ -122,26 +123,54 @@ class SearchConnection extends Component {
         if (this.state.formIsChanged) {
             this.setState({
                 selectedFromCrs: id,
-                formIsChanged: false
+                // formIsChanged: false
             })
         }
     }
 
-    handleSelectedLocationForm2 = event => {
-        console.log(event.target.getAttribute('name'))
+    resetInputFrom = () => {
+
+        this.setState({
+            selectedLocations: [],
+            selectedLocationsSize: 0,
+            selectedFromCrs: '',
+        })
     }
 
-    renderStatusOfFlags = () => {
-        // console.log("działa")
+    //zmiana po kliknięciu i wyborze stacji docelowej z podpowiedzi
+    handleSelectedLocationForm2 = event => {
+        console.log(event.target.getAttribute('name'))
 
-        //zestaw zasad i aktualizacji flag
+        this.setState({
+            stationInputFrom: event.target.getAttribute('name'),
+            selectedFromCrs: event.target.id,
+            flags: {
+                showSelect: false
+            }
+        })
+
+
+    }
+
+    //zestaw zasad i aktualizacji flag
+    renderStatusOfFlags() {
+        console.log("działa")
+
+        // if (this.state.stationInputFrom.length >= 3) {
+        //     this.setState({
+        //         flags: {
+        //             showSelect: true
+        //         }
+        //     })
+        // }
+
     }
 
 
 
     render() {
 
-        const { date, time, dateITime, dateComplete, timeComplete, dateITimeComplete, stationInputFrom, stationInputTo, selectedLocationsSize, selectedLocations } = this.state
+        const { date, time, dateITime, stationInputFrom, stationInputTo, selectedLocationsSize, selectedLocations, selectedFromCrs } = this.state
 
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
@@ -152,17 +181,22 @@ class SearchConnection extends Component {
                 id={item.id}
                 location={item.location}
                 crs={item.CRS}
-                // name={item.location}
                 chosen={this.handleSearchForm(this, item.id)}
             />
         ))
 
-        // let show_SearchFrom = this.state.stationInputFrom.length >= 3 ? searchForm : null
+        let showSelect = false
+        if (stationInputFrom.length >= 3 && selectedFromCrs === '') {
+            showSelect = true
+        } else if (stationInputFrom.length >= 3 && selectedLocations.length === 1) {
+            showSelect = false
+        } else if (selectedLocations.length > 15) {
+            // console.log("reset input")
+            this.resetInputFrom()
+        }
+        else showSelect = false
 
-        this.renderStatusOfFlags()
 
-        // show_SelectIHave = this.data.map(item => (
-        //     <SelectIHave key={item.id} id={item.id} title={item.title} chosen={this.handleSelectIHave(this, item.id)} />))
 
 
 
@@ -170,40 +204,32 @@ class SearchConnection extends Component {
             <div class="container">
                 <div class="row marginTop">
 
-
                     <div class="col">
                         <input name="stationInputFrom" class="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationInputFrom} onChange={this.handleChangeData} />
 
 
                         <div class="form-group mt-3">
 
-                            {this.state.flags.showSelect && <select class="custom-select custom-select-lg" size={selectedLocationsSize}
+                            {showSelect && <select class="custom-select custom-select-lg" size={selectedLocationsSize}
                                 onChange={this.handleSearchForm2}
                                 onClick={this.handleSelectedLocationForm2}
                             >
-
                                 {searchForm}
 
                             </select>}
-
-
                         </div>
-
                     </div>
-
-
-                    {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
                     <div class="col">
                         <input name="stationInputTo" class="validTo form-control form-control-lg" type="text" placeholder="TO" value={stationInputTo} onChange={this.handleChangeData} />
                     </div>
                     <div class="col">
 
-                        {dateComplete && <input name="date" class="validCalendar form-control form-control-lg" type="date" value={date} onChange={this.handleChangeData} min={this.minDate} max={maxDate} onClick={this.handleChangeCompliteStatus} />}
+                        {this.state.flags.dateITimeComplete && <input name="dateITime" class="validTime form-control form-control-lg" type="text" value={dateITime} onChange={this.handleChangeData} onClick={this.handleChangedateITime} />}
 
-                        {timeComplete && <input name="time" class="validClock form-control form-control-lg" type="time" value={time} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
+                        {this.state.flags.dateComplete && <input name="date" class="validCalendar form-control form-control-lg" type="date" value={date} onChange={this.handleChangeData} min={this.minDate} max={maxDate} onClick={this.handleChangeCompliteStatus} />}
 
-                        {dateITimeComplete && <input name="dateITime" class="validTime form-control form-control-lg" type="text" value={dateITime} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
+                        {this.state.flags.timeComplete && <input name="time" class="validClock form-control form-control-lg" type="time" value={time} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
 
                     </div>
                     <div class="col">
