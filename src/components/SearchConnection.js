@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchFrom from './SearchFrom'
+import SearchTo from './SearchTo'
 const data = require('./data')
 
 class SearchConnection extends Component {
@@ -19,8 +20,8 @@ class SearchConnection extends Component {
         selectedLocations: [],
         selectedLocationsSize: 0, //rozmiar okna selected
 
-        selectedFrom: '',
-        selectedTo: '',
+        // selectedFrom: '',
+        // selectedTo: '',
         selectedFromCrs: '',
         selectedToCrs: '',
 
@@ -31,7 +32,10 @@ class SearchConnection extends Component {
             timeComplete: false,
             dateITimeComplete: true,
         }
+    }
 
+    messages = {
+        input_error: 'There is no such station'
     }
 
     handleChangeData = event => {
@@ -95,9 +99,9 @@ class SearchConnection extends Component {
         if (previousState.stationInputFrom !== this.state.stationInputFrom) {
             selectedLocations = station.filter(item => item.location.includes(inputValue))
 
-            if (selectedLocationsSize > 5) {
+            if (selectedLocations.length > 5) {
                 selectedLocationsSize = 5
-            } else if (selectedLocationsSize === 2) {
+            } else if (selectedLocations.length === 1) {
                 selectedLocationsSize = 2
             } else {
                 selectedLocationsSize = selectedLocations.length
@@ -108,6 +112,9 @@ class SearchConnection extends Component {
                 selectedLocationsSize
             })
         }
+
+
+//dodac tutaj warunki dla SearchTo
 
     }
 
@@ -120,10 +127,13 @@ class SearchConnection extends Component {
     }
 
     handleSearchForm(id) {
-        if (this.state.formIsChanged) {
+        if (this.state.flags.formIsChanged) {
             this.setState({
                 selectedFromCrs: id,
-                // formIsChanged: false
+                flags: {
+                    formIsChanged: false
+                }
+
             })
         }
     }
@@ -138,15 +148,16 @@ class SearchConnection extends Component {
     }
 
     //zmiana po kliknięciu i wyborze stacji docelowej z podpowiedzi
-    handleSelectedLocationForm2 = event => {
-        console.log(event.target.getAttribute('name'))
+    handleSelectedLocationForm = event => {
+        // console.log(event.target.getAttribute('name'))
+        console.log(event.target.title)
 
         this.setState({
-            stationInputFrom: event.target.getAttribute('name'),
+            stationInputFrom: event.target.title,
             selectedFromCrs: event.target.id,
-            flags: {
-                showSelect: false
-            }
+            // flags: {
+            //     showSelect: false
+            // }
         })
 
 
@@ -181,60 +192,69 @@ class SearchConnection extends Component {
                 id={item.id}
                 location={item.location}
                 crs={item.CRS}
-                chosen={this.handleSearchForm(this, item.id)}
+            // chosen={this.handleSearchForm(this, item.id)}
             />
         ))
 
+
         let showSelect = false
-        if (stationInputFrom.length >= 3 && selectedFromCrs === '') {
+        let errorMessage = ''
+        if (stationInputFrom.length >= 3 && selectedFromCrs === '' && selectedLocations.length !== 0) {
             showSelect = true
         } else if (stationInputFrom.length >= 3 && selectedLocations.length === 1) {
             showSelect = false
         } else if (selectedLocations.length > 15) {
             // console.log("reset input")
             this.resetInputFrom()
+        } else if (selectedLocations.length === 0 && stationInputFrom.length >= 3) {
+           
+            errorMessage = 'There is no such station'
+          
         }
         else showSelect = false
 
+        // let show_errorFormMessage = <p>{this.messages.input_error}</p>
 
-
-
+        // let errorFormMessage = selectedLocations.length === 0 ? show_errorFormMessage : null
 
         return (
-            <div class="container">
-                <div class="row marginTop">
+            <div className="container">
+                <div className="row marginTop">
 
-                    <div class="col">
-                        <input name="stationInputFrom" class="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationInputFrom} onChange={this.handleChangeData} />
+                    <div className="col">
+                        <input name="stationInputFrom" className="validFrom form-control form-control-lg" type="text" placeholder="FROM" value={stationInputFrom} onChange={this.handleChangeData} />
 
 
-                        <div class="form-group mt-3">
+                        <div className="form-group mt-3">
 
-                            {showSelect && <select class="custom-select custom-select-lg" size={selectedLocationsSize}
-                                onChange={this.handleSearchForm2}
-                                onClick={this.handleSelectedLocationForm2}
+                            {showSelect && <select className="custom-select custom-select-lg" size={selectedLocationsSize}
+                                // onChange={this.handleSelectedLocationForm}
+                                // onChange={this.handleSearchForm2}
+                                onClick={this.handleSelectedLocationForm}
                             >
                                 {searchForm}
 
                             </select>}
+                            <center>{errorMessage}</center>
+                            
                         </div>
                     </div>
 
-                    <div class="col">
-                        <input name="stationInputTo" class="validTo form-control form-control-lg" type="text" placeholder="TO" value={stationInputTo} onChange={this.handleChangeData} />
+                    <div className="col">
+                        <input name="stationInputTo" className="validTo form-control form-control-lg" type="text" placeholder="TO" value={stationInputTo} onChange={this.handleChangeData} />
                     </div>
-                    <div class="col">
+                    <div className="col">
 
-                        {this.state.flags.dateITimeComplete && <input name="dateITime" class="validTime form-control form-control-lg" type="text" value={dateITime} onChange={this.handleChangeData} onClick={this.handleChangedateITime} />}
+                        {this.state.flags.dateITimeComplete && <input name="dateITime" className="validTime form-control form-control-lg" type="text" value={dateITime} onChange={this.handleChangeData} onClick={this.handleChangedateITime} />}
 
-                        {this.state.flags.dateComplete && <input name="date" class="validCalendar form-control form-control-lg" type="date" value={date} onChange={this.handleChangeData} min={this.minDate} max={maxDate} onClick={this.handleChangeCompliteStatus} />}
+                        {this.state.flags.dateComplete && <input name="date" className="validCalendar form-control form-control-lg" type="date" value={date} onChange={this.handleChangeData} min={this.minDate} max={maxDate} onClick={this.handleChangeCompliteStatus} />}
 
-                        {this.state.flags.timeComplete && <input name="time" class="validClock form-control form-control-lg" type="time" value={time} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
+                        {this.state.flags.timeComplete && <input name="time" className="validClock form-control form-control-lg" type="time" value={time} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
 
                     </div>
-                    <div class="col">
+                    <div className="col">
 
-                        <button type="button" class="btn btn-danger form-control form-control-lg">FIND YOUR CONNECTION</button>
+                        <button type="button" className="btn btn-danger form-control form-control-lg">FIND YOUR CONNECTION</button>
 
                     </div>
                 </div>

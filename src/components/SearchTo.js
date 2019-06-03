@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchFrom = props => {
+const SearchTo = props => {
 
     return (
         <option
@@ -15,4 +15,4 @@ const SearchFrom = props => {
 
 }
 
-export default SearchFrom
+export default SearchTo
