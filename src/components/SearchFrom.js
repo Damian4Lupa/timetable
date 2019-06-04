@@ -12,7 +12,6 @@ const SearchFrom = props => {
             {props.location}
         </option>
     )
-
 }
 
 export default SearchFrom
