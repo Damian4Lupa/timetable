@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InputFrom from './InputFrom'
 import InputTo from './InputTo'
+import DateAndTime from './DateAndTime'
 const data = require('./data')
 
 class SearchConnection extends Component {
@@ -162,11 +163,7 @@ class SearchConnection extends Component {
 
                     <div className="col">
 
-                        {this.state.flags.dateITimeComplete && <input name="dateITime" className="validTime form-control form-control-lg" type="text" value={dateITime} onChange={this.handleChangeData} onClick={this.handleChangedateITime} />}
-
-                        {this.state.flags.dateComplete && <input name="date" className="validCalendar form-control form-control-lg" type="date" value={date} onChange={this.handleChangeData} min={this.minDate} max={maxDate} onClick={this.handleChangeCompliteStatus} />}
-
-                        {this.state.flags.timeComplete && <input name="time" className="validClock form-control form-control-lg" type="time" value={time} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
+                        <DateAndTime />
 
                     </div>
                     <div className="col">
