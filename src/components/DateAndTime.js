@@ -3,36 +3,100 @@ import React, { Component } from 'react';
 class DateAndTime extends Component {
 
     minDate = new Date().toISOString().slice(0, 10)
-    date = new Date().toLocaleString().slice(0, 10)
     minTime = new Date().toLocaleTimeString().slice(0, 5)
-    dateITime = `${this.date} ${this.minTime}`
 
     state = {
         date: this.minDate,
         time: this.minTime,
-        dateITime: this.dateITime,
 
         dateComplete: false,
         timeComplete: false,
-        dateITimeComplete: true,
     }
 
+    handleChangeData = event => {
+        const name = event.target.name
+        const value = event.target.value
+        this.setState({
+            [name]: value
+        })
 
+    }
+
+    handleChangedateITime = () => {
+        this.setState({
+            dateComplete: true
+        })
+    }
+
+    handleDateInput = () => {
+
+        setTimeout(() => {
+            this.setState({
+                dateComplete: false,
+                timeComplete: true
+            })
+        }, 1500)
+
+    }
+
+    handleTimeInput = () => {
+
+        setTimeout(() => {
+            this.setState({
+                timeComplete: false
+            })
+        }, 1500)
+
+
+
+    }
 
     render() {
 
-        const { date, time, dateITime } = this.state
+        const { date, time } = this.state
 
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
 
+        let day = date.slice(8)
+        let month = date.slice(5).slice(0, 2)
+        let year = date.slice(0, 4)
+
+        let dateAndTime = `${day}.${month}.${year}  ${time}`
+
+        let sendData = this.props.chosen
+
         return (
             <>
-                {this.state.flags.dateITimeComplete && <input name="dateITime" className="validTime form-control form-control-lg" type="text" value={dateITime} onChange={this.handleChangeData} onClick={this.handleChangedateITime} />}
+                <input
+                    name="dateITime"
+                    className="validTime form-control form-control-lg" type="text"
+                    value={dateAndTime}
+                    onChange={sendData}
+                    onClick={this.handleChangedateITime}
+                />
 
-                {this.state.flags.dateComplete && <input name="date" className="validCalendar form-control form-control-lg" type="date" value={date} onChange={this.handleChangeData} min={this.minDate} max={maxDate} onClick={this.handleChangeCompliteStatus} />}
+                {this.state.dateComplete && <input
+                    name="date"
+                    className="validCalendar form-control form-control-lg mt-3"
+                    type="date"
+                    value={date}
+                    onChange={this.handleChangeData}
+                    min={this.minDate}
+                    max={maxDate}
+                    onClick={this.handleChangeCompliteStatus}
+                    onInput={this.handleDateInput}
+                />}
 
-                {this.state.flags.timeComplete && <input name="time" className="validClock form-control form-control-lg" type="time" value={time} onChange={this.handleChangeData} onClick={this.handleChangeCompliteStatus} />}
+                {this.state.timeComplete && <input
+                    name="time"
+                    className="validClock form-control form-control-lg mt-3"
+                    type="time"
+                    value={time}
+                    onChange={this.handleChangeData}
+                    onClick={this.handleChangeCompliteStatus}
+                    onInput={this.handleTimeInput}
+                />}
             </>
         );
     }

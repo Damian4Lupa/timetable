@@ -6,15 +6,9 @@ const data = require('./data')
 
 class SearchConnection extends Component {
 
-    minDate = new Date().toISOString().slice(0, 10)
-    date = new Date().toLocaleString().slice(0, 10)
-    minTime = new Date().toLocaleTimeString().slice(0, 5)
-    dateITime = `${this.date} ${this.minTime}`
-
     state = {
-        date: this.minDate,
-        time: this.minTime,
-        dateITime: this.dateITime,
+        date: "",
+        time: "",
 
         stationInputFrom: '', //wartość wpisana w input - wyświetlana wartoś
         stationInputTo: '',
@@ -26,35 +20,22 @@ class SearchConnection extends Component {
         selectedFromCrs: '',
         selectedToCrs: '',
 
-        flags: {
-            showSelect: true,
-            formIsChanged: true,
-            dateComplete: false,
-            timeComplete: false,
-            dateITimeComplete: true,
-        }
     }
 
 
-    handleChangeData = event => {
-        const name = event.target.name
-        const value = event.target.value
-        this.setState({
-            [name]: value
-        })
-    }
+    // handleChangeData = event => {
+    //     const name = event.target.name
+    //     const value = event.target.value
+    //     this.setState({
+    //         [name]: value
+    //     })
+    // }
 
     downloadTimetable = () => {
 
         const { selectedFromCrs, time, } = this.state
-        //szablon1 https://developer.transportapi.com/docs?raml=https://transportapi.com/v3/raml/transportapi.raml##request_uk_public_journey_from_from_to_to_type_date_time_json
-
-        //szablon2 https://transportapi.com/v3/uk/train/station/STP/2019-05-15/12:20/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger 
-
 
         const API = `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${this.minDate}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
-
-        // api pobiera liste dla danego przystanku, potem szukanie po destination
 
         fetch(API)
             .then(response => {
@@ -134,16 +115,13 @@ class SearchConnection extends Component {
 
 
 
-
+    handleDateAndTime = (date) => {
+        console.log(date)
+    }
 
     render() {
 
         const { date, time, dateITime, stationInputFrom, stationInputTo, selectedLocationsSize, selectedLocations, selectedFromCrs } = this.state
-
-        let maxDate = this.minDate.slice(0, 4) * 1 + 1
-        maxDate = maxDate + "-12-31"
-
-
 
         return (
             <div className="container">
@@ -163,7 +141,7 @@ class SearchConnection extends Component {
 
                     <div className="col">
 
-                        <DateAndTime />
+                        <DateAndTime chosen={this.handleDateAndTime(this, )} />
 
                     </div>
                     <div className="col">
