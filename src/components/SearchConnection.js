@@ -15,21 +15,9 @@ class SearchConnection extends Component {
         selectedLocations: [],
         selectedLocationsSize: 0, //rozmiar okna selected
 
-        // selectedFrom: '',
-        // selectedTo: '',
         selectedFromCrs: '',
         selectedToCrs: '',
-
     }
-
-
-    // handleChangeData = event => {
-    //     const name = event.target.name
-    //     const value = event.target.value
-    //     this.setState({
-    //         [name]: value
-    //     })
-    // }
 
     downloadTimetable = () => {
 
@@ -67,56 +55,54 @@ class SearchConnection extends Component {
     }
 
 
-    componentDidUpdate(previousProps, previousState) {
-        let inputValue = this.state.stationInputFrom //to co wpisuje w input
-        let station = [...data.data] //punkt wejściowy
+    // componentDidUpdate(previousProps, previousState) {
+    //     let inputValue = this.state.stationInputFrom //to co wpisuje w input
+    //     let station = [...data.data] //punkt wejściowy
 
-        let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
+    //     let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
 
-        let selectedLocationsSize = 0
+    //     let selectedLocationsSize = 0
 
-        if (previousState.stationInputFrom !== this.state.stationInputFrom) {
-            selectedLocations = station.filter(item => item.location.includes(inputValue))
+    //     if (previousState.stationInputFrom !== this.state.stationInputFrom) {
+    //         selectedLocations = station.filter(item => item.location.includes(inputValue))
 
-            if (selectedLocations.length > 5) {
-                selectedLocationsSize = 5
-            } else if (selectedLocations.length === 1) {
-                selectedLocationsSize = 2
-            } else {
-                selectedLocationsSize = selectedLocations.length
-            }
+    //         if (selectedLocations.length > 5) {
+    //             selectedLocationsSize = 5
+    //         } else if (selectedLocations.length === 1) {
+    //             selectedLocationsSize = 2
+    //         } else {
+    //             selectedLocationsSize = selectedLocations.length
+    //         }
 
-            this.setState({
-                selectedLocations,
-                selectedLocationsSize
-            })
-        }
-    }
-
-    // handleSearchForm2 = event => {
-    //     // console.log(event.target.value)
-
-    //     this.setState({
-    //         selectedFromCrs: event.target.value
-    //     })
-    // }
-
-    // handleSearchForm(id) {
-    //     if (this.state.flags.formIsChanged) {
     //         this.setState({
-    //             selectedFromCrs: id,
-    //             flags: {
-    //                 formIsChanged: false
-    //             }
+    //             selectedLocations,
+    //             selectedLocationsSize
     //         })
     //     }
     // }
 
+    handleInputFrom = (selectedFromCrs, stationInputFrom) => {
+        // console.log(selectedFromCrs, stationInputFrom)
 
+        this.setState({
+            selectedFromCrs,
+            stationInputFrom
+        })
+    }
 
+    handleInputTo = (stationInputTo, selectedToCrs) => {
+        this.setState({
+            stationInputTo,
+            selectedToCrs
+        })
+    }
 
-    handleDateAndTime = (date) => {
-        console.log(date)
+    handleDateAndTime = (date, time) => {
+        console.log(date, time)
+        this.setState({
+            date,
+            time
+        })
     }
 
     render() {
@@ -129,19 +115,19 @@ class SearchConnection extends Component {
 
                     <div className="col">
 
-                        <InputFrom />
+                        <InputFrom handleInputFrom={this.handleInputFrom} />
 
                     </div>
 
                     <div className="col">
 
-                        <InputTo />
+                        <InputTo handleInputTo={this.handleInputTo} />
 
                     </div>
 
                     <div className="col">
 
-                        <DateAndTime chosen={this.handleDateAndTime(this, )} />
+                        <DateAndTime handleDateAndTime={this.handleDateAndTime} />
 
                     </div>
                     <div className="col">

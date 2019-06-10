@@ -53,11 +53,17 @@ class InputFrom extends Component {
     }
 
     handleSelectedLocationForm = event => {
-        // console.log(event.target.title)
+
+        let stationInputTo = event.target.title
+        let selectedToCrs = event.target.id
+
         this.setState({
-            stationInputTo: event.target.title,
-            selectedToCrs: event.target.id,
+            stationInputTo,
+            selectedToCrs,
         })
+
+this.props.handleInputTo(stationInputTo, selectedToCrs)
+
     }
 
     render() {
@@ -93,16 +99,17 @@ class InputFrom extends Component {
         return (
 
             <>
-                <input 
-                name="stationInputTo" 
-                className="validTo form-control form-control-lg" type="text" placeholder="TO" 
-                value={stationInputTo} 
-                onChange={this.handleChangeData} 
+                <input
+                    name="stationInputTo"
+                    className="validTo form-control form-control-lg" type="text" placeholder="TO"
+                    value={stationInputTo}
+                    onChange={this.handleChangeData}
                 />
 
                 <div className="form-group mt-3">
 
-                    {showSelect && <select className="custom-select custom-select-lg"
+                    {showSelect && <select
+                        className="custom-select custom-select-lg"
                         size={selectedLocationsSize}
                         onClick={this.handleSelectedLocationForm}
                     >

@@ -11,6 +11,26 @@ class DateAndTime extends Component {
 
         dateComplete: false,
         timeComplete: false,
+        sendValue: true,
+    }
+
+    componentDidUpdate(previousProps, previousState) {
+
+        let date = this.state.date
+        let time = this.state.time
+
+        if (previousState.date !== this.state.date || previousState.time !== this.state.time) {
+            this.props.handleDateAndTime(date, time)
+        }
+
+        if (this.state.sendValue) {
+            this.props.handleDateAndTime(date, time)
+            
+            this.setState({
+                sendValue: false
+            })
+        }
+
     }
 
     handleChangeData = event => {
@@ -19,8 +39,14 @@ class DateAndTime extends Component {
         this.setState({
             [name]: value
         })
-
     }
+
+    // handleSendData = () => {
+    //     let date = this.state.date
+    //     let time = this.state.time
+
+    //     this.props.handleDateAndTime(date, time)
+    // }
 
     handleChangedateITime = () => {
         this.setState({
@@ -54,6 +80,8 @@ class DateAndTime extends Component {
     render() {
 
         const { date, time } = this.state
+
+        // this.handleSendData()
 
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"

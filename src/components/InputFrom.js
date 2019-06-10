@@ -33,6 +33,7 @@ class InputFrom extends Component {
                 selectedLocations,
                 selectedLocationsSize
             })
+
         }
     }
 
@@ -53,11 +54,16 @@ class InputFrom extends Component {
     }
 
     handleSelectedLocationForm = event => {
-        // console.log(event.target.title)
+
+        let selectedFromCrs = event.target.id
+        let stationInputFrom = event.target.title
+
         this.setState({
-            stationInputFrom: event.target.title,
-            selectedFromCrs: event.target.id,
+            stationInputFrom,
+            selectedFromCrs,
         })
+
+        this.props.handleInputFrom(selectedFromCrs, stationInputFrom)
     }
 
     render() {
@@ -102,7 +108,8 @@ class InputFrom extends Component {
 
                 <div className="form-group mt-3">
 
-                    {showSelect && <select className="custom-select custom-select-lg"
+                    {showSelect && <select
+                        className="custom-select custom-select-lg"
                         size={selectedLocationsSize}
                         onClick={this.handleSelectedLocationForm}
                     >
