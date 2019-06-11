@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InputFrom from './InputFrom'
 import InputTo from './InputTo'
 import DateAndTime from './DateAndTime'
+import FoundConnection from './FoundConnection'
 const data = require('./data')
 
 class SearchConnection extends Component {
@@ -12,18 +13,21 @@ class SearchConnection extends Component {
 
         stationInputFrom: '', //wartość wpisana w input - wyświetlana wartoś
         stationInputTo: '',
-        selectedLocations: [],
-        selectedLocationsSize: 0, //rozmiar okna selected
+        // selectedLocations: [],
+        // selectedLocationsSize: 0, //rozmiar okna selected
 
         selectedFromCrs: '',
         selectedToCrs: '',
+
+        foundConnection: [],
+        show_FoundConnection: true
     }
 
     downloadTimetable = () => {
 
-        const { selectedFromCrs, time, } = this.state
+        const { selectedFromCrs, time, date } = this.state
 
-        const API = `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${this.minDate}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
+        const API = `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${date}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
 
         fetch(API)
             .then(response => {
@@ -37,23 +41,14 @@ class SearchConnection extends Component {
             .catch(error => alert(`\nEasy, it's just a error \n${error} \nRefresh the page `))
             .then(response => response.json())
             .then(data => {
-                const currency = data.rates
-                const date = data.date
 
+                // console.log(data)
 
                 this.setState({
-                    currency,
-                    date
-                })
-            })
-            .then(() => {
-                let rate = this.state.currency[this.state.currencyIWant]
-                this.setState({
-                    rate
+                    foundConnection: data
                 })
             })
     }
-
 
     // componentDidUpdate(previousProps, previousState) {
     //     let inputValue = this.state.stationInputFrom //to co wpisuje w input
@@ -105,9 +100,13 @@ class SearchConnection extends Component {
         })
     }
 
+    handleButtonSearch = () => {
+        this.downloadTimetable()
+    }
+
     render() {
 
-        const { date, time, dateITime, stationInputFrom, stationInputTo, selectedLocationsSize, selectedLocations, selectedFromCrs } = this.state
+        const { show_FoundConnection } = this.state
 
         return (
             <div className="container">
@@ -132,10 +131,27 @@ class SearchConnection extends Component {
                     </div>
                     <div className="col">
 
-                        <button type="button" className="btn btn-danger form-control form-control-lg">FIND YOUR CONNECTION</button>
+                        <button
+                            type="button"
+                            className="btn btn-danger form-control form-control-lg"
+                            onClick={this.handleButtonSearch}
+                        >
+                            FIND YOUR CONNECTION
+                            </button>
 
                     </div>
                 </div>
+
+                {/* <div className="row mt-5"> */}
+              
+                    {show_FoundConnection && <FoundConnection
+                        connection={this.state.foundConnection}
+                        stationTo={this.state.stationInputTo}
+                    />}
+
+
+                {/* </div> */}
+
             </div>
         );
     }

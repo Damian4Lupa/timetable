@@ -83,3 +83,7 @@ input.validTime {
     background-size: 32px;
     background-position: left center;
 }
+
+.grey {
+    color: black
+}

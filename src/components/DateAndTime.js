@@ -30,7 +30,6 @@ class DateAndTime extends Component {
                 sendValue: false
             })
         }
-
     }
 
     handleChangeData = event => {
