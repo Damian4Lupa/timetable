@@ -20,14 +20,17 @@ class SearchConnection extends Component {
         selectedToCrs: '',
 
         foundConnection: [],
-        show_FoundConnection: true
+        show_FoundConnection: false
     }
 
     downloadTimetable = () => {
 
-        const { selectedFromCrs, time, date } = this.state
+        // const { selectedFromCrs, time, date } = this.state
 
-        const API = `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${date}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
+        const API = `https://transportapi.com/v3/uk/public/journey/from/lonlat:-0.086269,51.505030/to/lonlat:-4.430530,55.864401/at/2019-07-21/15:20.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast`
+
+
+        // szablon zapytania `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${date}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
 
         fetch(API)
             .then(response => {
@@ -45,7 +48,8 @@ class SearchConnection extends Component {
                 // console.log(data)
 
                 this.setState({
-                    foundConnection: data
+                    foundConnection: data,
+                    show_FoundConnection: true
                 })
             })
     }
@@ -93,7 +97,7 @@ class SearchConnection extends Component {
     }
 
     handleDateAndTime = (date, time) => {
-        console.log(date, time)
+        // console.log(date, time)
         this.setState({
             date,
             time
@@ -143,11 +147,11 @@ class SearchConnection extends Component {
                 </div>
 
                 {/* <div className="row"> */}
-              
-                    {show_FoundConnection && <FoundConnection
-                        connection={this.state.foundConnection}
-                        stationTo={this.state.stationInputTo}
-                    />}
+
+                {show_FoundConnection && <FoundConnection
+                    connection={this.state.foundConnection}
+                    stationTo={this.state.stationInputTo}
+                />}
 
 
                 {/* </div> */}

@@ -11,7 +11,7 @@ const Header = () => {
 
                 <a className="navbar-brand" href="#">
                     <img src={icon} width="35" height="35" className="d-inline-block align-top mr-2" alt="icon" />
-                    Bootstrap
+                    United Kingdom Railways
                     </a>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
