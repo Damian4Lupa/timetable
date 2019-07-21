@@ -3,6 +3,10 @@ body {
     color: #5a5a5a;
 }
 
+h5 {
+    margin-bottom: 15px
+}
+
 .blue {
     background-color: #303C6C
 }
@@ -39,7 +43,7 @@ body {
 input.validFrom {
     padding-right: 10px;
     padding-left: 40px;
-    background-image: url('./img/from.png');
+    background-image: url('../components/img/from.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: left center;
@@ -48,7 +52,7 @@ input.validFrom {
 input.validTo {
     padding-right: 10px;
     padding-left: 40px;
-    background-image: url('./img/to.png');
+    background-image: url('../components/img/to.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: left center;
@@ -58,7 +62,7 @@ input.validCalendar {
     padding-right: 5px;
     padding-left: 35px;
     text-align: center;
-    background-image: url('./img/calendar.png');
+    background-image: url('../components/img/calendar.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: left center;
@@ -68,7 +72,7 @@ input.validClock {
     padding-right: 5px;
     padding-left: 35px;
     text-align: center;
-    background-image: url('./img/clock.png');
+    background-image: url('../components/img/clock.png');
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: left center;
@@ -78,7 +82,7 @@ input.validTime {
     padding-right: 5px;
     padding-left: 35px;
     text-align: center;
-    background-image: url('./img/time.png');
+    background-image: url('../components/img/time.png');
     background-repeat: no-repeat;
     background-size: 32px;
     background-position: left center;

@@ -3,7 +3,7 @@ import InputFrom from './InputFrom'
 import InputTo from './InputTo'
 import DateAndTime from './DateAndTime'
 import FoundConnection from './FoundConnection'
-const data = require('./data')
+// const data = require('./data')
 
 class SearchConnection extends Component {
 
@@ -142,7 +142,7 @@ class SearchConnection extends Component {
                     </div>
                 </div>
 
-                {/* <div className="row mt-5"> */}
+                {/* <div className="row"> */}
               
                     {show_FoundConnection && <FoundConnection
                         connection={this.state.foundConnection}
