@@ -99,8 +99,8 @@ class FoundConnection extends Component {
                         <p>{connection[4].mode === "foot" ? "-" : this.showPrice(connection[4].mode, connection[4].duration)}</p>
                         <p>{connection[5].mode === "foot" ? "-" : this.showPrice(connection[5].mode, connection[5].duration)}</p>
                         <p>{connection[6].mode === "foot" ? "-" : this.showPrice(connection[6].mode, connection[6].duration)}</p>
-                        
-                     
+
+
 
                     </div>
                 </div>
