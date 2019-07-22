@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchFrom from './SearchFrom'
-const data = require('./data')
+// const data = require('./data')
+const data = require('../data/location.js')
 
 class InputFrom extends Component {
     state = {
@@ -13,6 +14,8 @@ class InputFrom extends Component {
     componentDidUpdate(previousProps, previousState) {
         let inputValue = this.state.stationInputFrom //to co wpisuje w input
         let station = [...data.data] //punkt wejściowy
+
+
 
         let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
 
@@ -72,10 +75,10 @@ class InputFrom extends Component {
 
         let searchForm = selectedLocations.map(item => (
             <SearchFrom
-                key={item.id}
-                id={item.id}
+                key={item.location}
+                id={item.location}
                 location={item.location}
-                crs={item.CRS}
+                lonlat={item.lonlat}
             />
         ))
 

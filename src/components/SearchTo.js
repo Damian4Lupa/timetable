@@ -4,10 +4,10 @@ const SearchTo = props => {
 
     return (
         <option
-            value={props.crs}
-            id={props.crs}
+            value={props.lonlat}
+            id={props.location}
             title={props.location}
-            // onClick={props.chosen}
+        // onClick={props.chosen}
         >
             {props.location}
         </option>

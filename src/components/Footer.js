@@ -13,7 +13,7 @@ const Footer = () => {
 
 
                         <div className="col-3 col-md">
-                            <h5>United Kingdom Railways</h5>
+                            <h5>United Kingdom Transport</h5>
                             <ul className="list-unstyled text-small">
                                 <li><a className="text-muted" href="#">KOLEO calendars</a></li>
                                 <li><a className="text-muted" href="#">Join us!</a></li>
@@ -50,7 +50,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="text-center text-small font-weight-light mt-5">
-                        <p>© United Kingdom Railways 2019 All rights reserved - The website uses cookies.</p>
+                        <p>© United Kingdom Transport 2019 All rights reserved - The website uses cookies.</p>
                     </div>
                 </div>
 
