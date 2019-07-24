@@ -1,6 +1,10 @@
-## United Kingdom Railways
+## United Kingdom Transport
 
-Railway connections search engine for the ten largest cities in the UK (London, Birmingham, Glasgow, Sheffield, Manchester, Edinburgh, Liverpool, Bristol and Cardiff)
+Application in preparation
+
+Searches and displays the best connection between major cities in the UK (London, Birmingham, Glasgow, Sheffield, Manchester, Edinburgh, Liverpool, Bristol and Cardiff). For each stage of the journey, it provides its duration and approximate cost.
+
+The application uses the API https://www.transportapi.com/
 
 ## Available Scripts
 
