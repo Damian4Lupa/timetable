@@ -2,9 +2,9 @@
 
 Application in preparation
 
-Searches and displays the best connection between major cities in the UK (London, Birmingham, Glasgow, Sheffield, Manchester, Edinburgh, Liverpool, Bristol and Cardiff). For each stage of the journey, it provides its duration and approximate cost.
+Search and display the best connection (bus and train) between the major cities of the UK (London, Birmingham, Glasgow, Sheffield, Manchester, Edinburgh, Liverpool, Bristol and Cardiff). At each stage of the journey, it displays the duration and approximate cost.
 
-The application uses the API https://www.transportapi.com/
+The application uses the https://www.transportapi.com/ API
 
 ## Available Scripts
 
