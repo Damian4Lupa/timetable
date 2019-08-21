@@ -6,9 +6,9 @@ Search and display the best connection (bus and train) between the major cities 
 
 The application uses the https://www.transportapi.com/ API
 
-## Available Scripts
+### `npm install`
 
-In the project directory, you can run:
+Download all packages needed to run
 
 ### `npm start`
 
