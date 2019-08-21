@@ -133,14 +133,16 @@ class SearchConnection extends Component {
 
     handleButtonSearch = () => {
 
-        const { selectedFrom, selectedTo } = this.state
+        // const { selectedFrom, selectedTo } = this.state
 
-        if (selectedFrom !== '' && selectedTo !== '') {
-            this.handleButtonLoading()
-            this.downloadTimetable()
-        } else {
-            this.handleErrorConnetion()
-        }
+        this.downloadTimetable()
+
+        // if (selectedFrom !== '' && selectedTo !== '') {
+        //     this.handleButtonLoading()
+        //     this.downloadTimetable()
+        // } else {
+        //     this.handleErrorConnetion()
+        // }
     }
 
     render() {

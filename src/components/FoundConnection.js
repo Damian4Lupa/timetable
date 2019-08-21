@@ -23,9 +23,6 @@ class FoundConnection extends Component {
 
     render() {
 
-        let connection = this.props.connection.routes[0].route_parts
-        let connectionLength = (connection.length - 1)
-
         let table22 = [
             [1, "-", "-", "-", "-", "-"],
             [2, "-", "-", "-", "-", "-"],
@@ -44,11 +41,17 @@ class FoundConnection extends Component {
             [15, "-", "-", "-", "-", "-"],
         ]
 
+        let connection = this.props.connection.routes[0].route_parts
+        let connectionLength = (connection.length - 1)
         let test = table22.slice(0, connectionLength)
-        console.log(test)
+
+
+        console.log("gotowa tablica", test)
         console.log(connectionLength)
         console.log("pobrane dane", connection)
 
+        // 1-kreowanie tablicy na określoną długość
+        // 2-wypełnianie dostosowanej tablicy - jak w airTab
 
         let table = [
             [1, `${connection[1].from_point_name}`, `${connection[1].to_point_name}`, `${connection[1].mode}`, `${connection[1].duration}`, `${connection[1].mode === "foot" ? "-" : this.showPrice(connection[1].mode, connection[1].duration)}`],
@@ -63,7 +66,6 @@ class FoundConnection extends Component {
 
             // [6, `${connection[6].from_point_name}`, `${connection[6].to_point_name}`, `${connection[6].mode}`, `${connection[6].duration}`, `${connection[6].mode === "foot" ? "-" : this.showPrice(connection[6].mode, connection[6].duration)}`],
         ]
-
 
         const row = table.map((table) =>
             <tr>
