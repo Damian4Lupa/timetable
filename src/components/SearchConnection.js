@@ -11,26 +11,25 @@ class SearchConnection extends Component {
         date: "",
         time: "",
 
-        stationInputFrom: '', //wartość wpisana w input - wyświetlana wartoś
-        stationInputTo: '',
-        // selectedLocations: [],
-        // selectedLocationsSize: 0, //rozmiar okna selected
+        selectedFrom: '',
+        selectedFromLonlat: '',
 
-        selectedFromCrs: '',
-        selectedToCrs: '',
+        selectedTo: '',
+        selectedToLonlat: '',
 
         foundConnection: [],
-        show_FoundConnection: false
+        show_FoundConnection: false,
+        errorConnetion: false,
+        loadingData: false,
     }
 
     downloadTimetable = () => {
 
-        // const { selectedFromCrs, time, date } = this.state
+        // const { selectedFromLonlat, selectedToLonlat, time, date } = this.state
 
-        const API = `https://transportapi.com/v3/uk/public/journey/from/lonlat:-0.086269,51.505030/to/lonlat:-4.430530,55.864401/at/2019-07-21/15:20.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast`
+        // const API = `https://transportapi.com/v3/uk/public/journey/from/lonlat:${selectedFromLonlat}/to/lonlat:${selectedToLonlat}/at/${date}/${time}.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast`
 
-
-        // szablon zapytania `https://transportapi.com/v3/uk/train/station/${selectedFromCrs}/${date}/${time}/timetable.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&train_status=passenger`
+        const API = "https://transportapi.com/v3/uk/public/journey/from/lonlat:-0.134649,51.529258/to/lonlat:-0.088780,51.506383/at/2019-08-20/15:20.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast"
 
         fetch(API)
             .then(response => {
@@ -45,11 +44,12 @@ class SearchConnection extends Component {
             .then(response => response.json())
             .then(data => {
 
-                // console.log(data)
+                console.log(data)
 
                 this.setState({
                     foundConnection: data,
-                    show_FoundConnection: true
+                    show_FoundConnection: true,
+                    loadingData: false
                 })
             })
     }
@@ -80,19 +80,27 @@ class SearchConnection extends Component {
     //     }
     // }
 
-    handleInputFrom = (selectedFromCrs, stationInputFrom) => {
-        // console.log(selectedFromCrs, stationInputFrom)
-
+    handleSelectedFrom = selectedFrom => {
         this.setState({
-            selectedFromCrs,
-            stationInputFrom
+            selectedFrom,
         })
     }
 
-    handleInputTo = (stationInputTo, selectedToCrs) => {
+    handleSelectedFromLonlat = selectedFromLonlat => {
         this.setState({
-            stationInputTo,
-            selectedToCrs
+            selectedFromLonlat,
+        })
+    }
+
+    handleInputTo = selectedTo => {
+        this.setState({
+            selectedTo
+        })
+    }
+
+    handleSelectedToLonlat = selectedToLonlat => {
+        this.setState({
+            selectedToLonlat
         })
     }
 
@@ -104,13 +112,44 @@ class SearchConnection extends Component {
         })
     }
 
+    handleErrorConnetion = () => {
+        this.setState({
+            errorConnetion: true
+        })
+
+        setTimeout(() => {
+            this.setState({
+                errorConnetion: false
+            })
+        }, 2500);
+
+    }
+
+    handleButtonLoading = () => {
+        this.setState({
+            loadingData: true
+        })
+    }
+
     handleButtonSearch = () => {
+
+        // const { selectedFrom, selectedTo } = this.state
+
         this.downloadTimetable()
+
+        // if (selectedFrom !== '' && selectedTo !== '') {
+        //     this.handleButtonLoading()
+        //     this.downloadTimetable()
+        // } else {
+        //     this.handleErrorConnetion()
+        // }
     }
 
     render() {
 
-        const { show_FoundConnection } = this.state
+        const { show_FoundConnection, errorConnetion, loadingData } = this.state
+
+        const show_error = <h4 className="text-center mt-4 text-muted">Please select the start and end stations correctly</h4>
 
         return (
             <div className="container">
@@ -118,13 +157,19 @@ class SearchConnection extends Component {
 
                     <div className="col">
 
-                        <InputFrom handleInputFrom={this.handleInputFrom} />
+                        <InputFrom
+                            handleSelectedFrom={this.handleSelectedFrom}
+                            handleSelectedFromLonlat={this.handleSelectedFromLonlat}
+                        />
 
                     </div>
 
                     <div className="col">
 
-                        <InputTo handleInputTo={this.handleInputTo} />
+                        <InputTo
+                            handleInputTo={this.handleInputTo}
+                            handleSelectedToLonlat={this.handleSelectedToLonlat}
+                        />
 
                     </div>
 
@@ -135,26 +180,33 @@ class SearchConnection extends Component {
                     </div>
                     <div className="col">
 
-                        <button
+                        {loadingData || <button
                             type="button"
                             className="btn btn-danger form-control form-control-lg"
                             onClick={this.handleButtonSearch}
                         >
                             FIND YOUR CONNECTION
-                            </button>
+                            </button>}
+
+                        {loadingData && <button
+                            type="button"
+                            className="btn btn-danger form-control form-control-lg"
+                        >
+                            <span class="spinner-border spinner-border-sm mr-2 mb-1" role="status" aria-hidden="true"></span>
+                            LOADING...
+                        </button>}
 
                     </div>
-                </div>
 
-                {/* <div className="row"> */}
+                </div>
+                <div>
+                    {errorConnetion && show_error}
+                </div>
 
                 {show_FoundConnection && <FoundConnection
                     connection={this.state.foundConnection}
-                    stationTo={this.state.stationInputTo}
+                // stationTo={this.state.stationInputTo}
                 />}
-
-
-                {/* </div> */}
 
             </div>
         );

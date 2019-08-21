@@ -8,7 +8,8 @@ class InputFrom extends Component {
         stationInputTo: '',
         selectedLocations: [],
         selectedLocationsSize: 0,
-        selectedToCrs: '',
+        selectedTo: '',
+        selectedToLonlat: ''
     }
 
     componentDidUpdate(previousProps, previousState) {
@@ -16,7 +17,7 @@ class InputFrom extends Component {
         let station = [...data.data] //punkt wejściowy
 
         let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
-
+        let selectedToLonlat = ''
         let selectedLocationsSize = 0
 
         if (previousState.stationInputTo !== this.state.stationInputTo) {
@@ -30,10 +31,19 @@ class InputFrom extends Component {
                 selectedLocationsSize = selectedLocations.length
             }
 
+            if (selectedToLonlat === undefined || this.state.selectedTo === '') {
+                selectedToLonlat = null
+            } else if (inputValue.length > 5 && this.state.selectedTo !== '') {
+                selectedToLonlat = selectedLocations[0].lonlat
+            }
+
             this.setState({
                 selectedLocations,
-                selectedLocationsSize
+                selectedLocationsSize,
+                selectedToLonlat
             })
+
+            this.props.handleSelectedToLonlat(selectedToLonlat)
         }
     }
 
@@ -49,34 +59,35 @@ class InputFrom extends Component {
         this.setState({
             selectedLocations: [],
             selectedLocationsSize: 0,
-            selectedToCrs: '',
+            selectedTo: '',
+            selectedToLonlat: '',
         })
     }
 
     handleSelectedLocationForm = event => {
 
         let stationInputTo = event.target.title
-        let selectedToCrs = event.target.id
+        let selectedTo = event.target.id
 
         this.setState({
             stationInputTo,
-            selectedToCrs,
+            selectedTo,
         })
 
-this.props.handleInputTo(stationInputTo, selectedToCrs)
+        this.props.handleInputTo(selectedTo)
 
     }
 
     render() {
 
-        const { stationInputTo, selectedLocationsSize, selectedLocations, selectedToCrs } = this.state
+        const { stationInputTo, selectedLocationsSize, selectedLocations, selectedTo } = this.state
 
         let searchForm = selectedLocations.map(item => (
             <SearchTo
-                key={item.id}
-                id={item.id}
+                key={item.location}
+                id={item.location}
                 location={item.location}
-                crs={item.CRS}
+                lonlat={item.lonlat}
             />
         ))
 
@@ -84,7 +95,7 @@ this.props.handleInputTo(stationInputTo, selectedToCrs)
         let showSelect = false
         let errorMessage = ''
 
-        if (stationInputTo.length >= 3 && selectedToCrs === '' && selectedLocations.length !== 0) {
+        if (stationInputTo.length >= 3 && selectedTo === '' && selectedLocations.length !== 0) {
             showSelect = true
         } else if (stationInputTo.length >= 3 && selectedLocations.length === 1) {
             showSelect = false
