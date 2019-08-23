@@ -7,7 +7,11 @@ class FoundConnection extends Component {
         let price = ""
         let number = parseInt(duration)
 
-        if (mode === "bus") {
+        if (mode === "foot") {
+            return "-"
+        }
+
+        if (mode === "bus" || mode === "dlr") {
             price = 2
         } else if (mode === "train" && number >= 6 && number < 8) {
             price = 30
@@ -23,7 +27,11 @@ class FoundConnection extends Component {
 
     render() {
 
-        let table22 = [
+        let connection = this.props.connection.routes[0].route_parts
+        let duration = this.props.connection.routes[0].duration
+        let connectionLength = (connection.length - 1)
+
+        let array = [
             [1, "-", "-", "-", "-", "-"],
             [2, "-", "-", "-", "-", "-"],
             [3, "-", "-", "-", "-", "-"],
@@ -41,42 +49,41 @@ class FoundConnection extends Component {
             [15, "-", "-", "-", "-", "-"],
         ]
 
-        let connection = this.props.connection.routes[0].route_parts
-        let connectionLength = (connection.length - 1)
-        let test = table22.slice(0, connectionLength)
+        let table = array.slice(0, connectionLength)
 
+        // console.log("connection", connection)
+        // console.log("connectionLength", connectionLength)
+        // console.log("table", table)
 
-        console.log("gotowa tablica", test)
-        console.log(connectionLength)
-        console.log("pobrane dane", connection)
+        for (let i = 0; i < table.length; i++) {
 
-        // 1-kreowanie tablicy na określoną długość
-        // 2-wypełnianie dostosowanej tablicy - jak w airTab
+            //liczenie kolejnych rzędów tabeli
+            // console.log("liczenie wierszy", i)
+            // let normalPrice = this.showPrice(connection, travelTime)
 
-        let table = [
-            [1, `${connection[1].from_point_name}`, `${connection[1].to_point_name}`, `${connection[1].mode}`, `${connection[1].duration}`, `${connection[1].mode === "foot" ? "-" : this.showPrice(connection[1].mode, connection[1].duration)}`],
+            if (connection[i].from_point_name.includes("special")) {
+                console.log("special point występuje")
+            }
 
-            [2, `${connection[2].from_point_name}`, `${connection[2].to_point_name}`, `${connection[2].mode}`, `${connection[2].duration}`, `${connection[2].mode === "foot" ? "-" : this.showPrice(connection[2].mode, connection[2].duration)}`],
-
-            // [3, `${connection[3].from_point_name}`, `${connection[3].to_point_name}`, `${connection[3].mode}`, `${connection[3].duration}`, `${connection[3].mode === "foot" ? "-" : this.showPrice(connection[3].mode, connection[3].duration)}`],
-
-            // [4, `${connection[4].from_point_name}`, `${connection[4].to_point_name}`, `${connection[4].mode}`, `${connection[4].duration}`, `${connection[4].mode === "foot" ? "-" : this.showPrice(connection[4].mode, connection[4].duration)}`],
-
-            // [5, `${connection[5].from_point_name}`, `${connection[5].to_point_name}`, `${connection[5].mode}`, `${connection[5].duration}`, `${connection[5].mode === "foot" ? "-" : this.showPrice(connection[5].mode, connection[5].duration)}`],
-
-            // [6, `${connection[6].from_point_name}`, `${connection[6].to_point_name}`, `${connection[6].mode}`, `${connection[6].duration}`, `${connection[6].mode === "foot" ? "-" : this.showPrice(connection[6].mode, connection[6].duration)}`],
-        ]
+            table[i][1] = connection[i].from_point_name
+            table[i][2] = connection[i].to_point_name
+            table[i][3] = connection[i].mode === "bus" ? `${connection[i].mode} (line: ${connection[i].line_name})` : connection[i].mode
+            table[i][4] = connection[i].duration
+            table[i][5] = this.showPrice(connection[i].mode, connection[i].duration)
+        }
 
         const row = table.map((table) =>
             <tr>
-                <td>{table[0]}</td>
-                <td>{table[1]}</td>
-                <td>{table[2]}</td>
-                <td>{table[3]}</td>
-                <td>{table[4]}</td>
-                <td>{table[5]}</td>
+                <td key={1}>{table[0]}</td>
+                <td key={2}>{table[1]}</td>
+                <td key={3}>{table[2]}</td>
+                <td key={4}>{table[3]}</td>
+                <td key={5}>{table[4]}</td>
+                <td key={6}>{table[5]}</td>
             </tr>
         )
+
+        const summary = <h6>Total travel time: {duration}, total cost: {null}</h6>
 
         return (
             <>
@@ -93,6 +100,7 @@ class FoundConnection extends Component {
                     </thead>
                     <tbody>
                         {row}
+                        {summary}
                     </tbody>
                 </table>
 
