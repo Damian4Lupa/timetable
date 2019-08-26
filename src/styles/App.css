@@ -91,3 +91,7 @@ input.validTime {
 .grey {
     color: black
 }
+
+tbody.collapse.in {
+    display: table-row-group;
+  }

@@ -25,10 +25,8 @@ class FoundConnection extends Component {
         return price + "£"
     }
 
-    render() {
-
+    shortenTables = () => {
         let connection = this.props.connection.routes[0].route_parts
-        let duration = this.props.connection.routes[0].duration
         let connectionLength = (connection.length - 1)
 
         let array = [
@@ -51,43 +49,147 @@ class FoundConnection extends Component {
 
         let table = array.slice(0, connectionLength)
 
-        // console.log("connection", connection)
-        // console.log("connectionLength", connectionLength)
-        // console.log("table", table)
+        return table
+    }
+
+    shortenTablesDetails = () => {
+        let connection = this.props.connection.routes[0].route_parts
+        let connectionLength = (connection.length - 1)
+
+        let array = [
+            [1, "-", "-", "-"],
+            [2, "-", "-", "-"],
+            [3, "-", "-", "-"],
+            [4, "-", "-", "-"],
+            [5, "-", "-", "-"],
+            [6, "-", "-", "-"],
+            [7, "-", "-", "-"],
+            [8, "-", "-", "-"],
+            [9, "-", "-", "-"],
+            [10, "-", "-", "-"],
+            [11, "-", "-", "-"],
+            [12, "-", "-", "-"],
+            [13, "-", "-", "-"],
+            [14, "-", "-", "-"],
+            [15, "-", "-", "-"],
+        ]
+
+        let table = array.slice(0, connectionLength)
+
+        return table
+    }
+
+
+
+
+    render() {
+
+        let connection = this.props.connection.routes[0].route_parts
+        let duration = this.props.connection.routes[0].duration
+        let table = this.shortenTables()
+        let details = this.shortenTablesDetails()
+        let NewConnection = [...connection]
+        let detailsConnection = [...connection]
 
         for (let i = 0; i < table.length; i++) {
 
-            //liczenie kolejnych rzędów tabeli
-            // console.log("liczenie wierszy", i)
-            // let normalPrice = this.showPrice(connection, travelTime)
-
-            if (connection[i].from_point_name.includes("special")) {
-                console.log("special point występuje")
+            if (NewConnection[i].from_point_name.includes("specified point")) {
+                console.log("specified point")
+                // return delete NewConnection[i]
+                // console.log(NewConnection)
             }
 
-            table[i][1] = connection[i].from_point_name
-            table[i][2] = connection[i].to_point_name
-            table[i][3] = connection[i].mode === "bus" ? `${connection[i].mode} (line: ${connection[i].line_name})` : connection[i].mode
-            table[i][4] = connection[i].duration
-            table[i][5] = this.showPrice(connection[i].mode, connection[i].duration)
+            table[i][1] = NewConnection[i].from_point_name
+            table[i][2] = NewConnection[i].to_point_name
+            table[i][3] = NewConnection[i].mode === "bus" ? `${NewConnection[i].mode} (line: ${NewConnection[i].line_name})` : NewConnection[i].mode
+            table[i][4] = NewConnection[i].duration
+            table[i][5] = this.showPrice(NewConnection[i].mode, NewConnection[i].duration)
+        }
+
+        for (let i = 0; i < details.length; i++) {
+
+            details[i][0] = ""
+            details[i][1] = detailsConnection[i].destination ? `destination: ${detailsConnection[i].destination}` : ""
+            details[i][2] = `arrival time: ${detailsConnection[i].arrival_time}`
+            details[i][3] = `departure time: ${detailsConnection[i].departure_time}`
         }
 
         const row = table.map((table) =>
-            <tr>
-                <td key={1}>{table[0]}</td>
-                <td key={2}>{table[1]}</td>
-                <td key={3}>{table[2]}</td>
-                <td key={4}>{table[3]}</td>
-                <td key={5}>{table[4]}</td>
-                <td key={6}>{table[5]}</td>
-            </tr>
+            <tbody>
+                <tr class="clickable"
+                    data-toggle="collapse"
+                    data-target={`#group-of-rows-${table[0]}`}
+                    aria-expanded="false"
+                    aria-controls={`group-of-rows-${table[0]}`}
+                >
+                    <td>{table[0]}</td>
+                    <td>{table[1]}</td>
+                    <td>{table[2]}</td>
+                    <td>{table[3]}</td>
+                    <td>{table[4]}</td>
+                    <td>{table[5]}</td>
+
+                </tr>
+            </tbody>
+
+            // <tr>
+            //     <td key={1}>{table[0]}</td>
+            //     <td key={2}>{table[1]}</td>
+            //     <td key={3}>{table[2]}</td>
+            //     <td key={4}>{table[3]}</td>
+            //     <td key={5}>{table[4]}</td>
+            //     <td key={6}>{table[5]}</td>
+            // </tr>
         )
+
+        const row2 = details.map((details) =>
+
+            <tbody id={`group-of-rows-${table[0]}`} class="collapse">
+                <tr>
+                    <td>{details[0]}</td>
+                    <td>{details[1]}</td>
+                    <td>{details[2]}</td>
+                    <td>{details[3]}</td>
+                </tr>
+            </tbody>
+        )
+
+
+
 
         const summary = <h6>Total travel time: {duration}, total cost: {null}</h6>
 
         return (
             <>
-                <table className="table table-hover text-center mt-5">
+
+                <table class="table table-responsive table-hover text-center mt-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Connection</th>
+                            <th scope="col">Travel time</th>
+                            <th scope="col">Normal price</th>
+                        </tr>
+                    </thead>
+
+
+                    {row}
+                    {row2}
+
+                </table>
+
+
+
+
+
+
+
+
+
+                {/* <table className="table table-hover text-center mt-5">
+
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -99,11 +201,14 @@ class FoundConnection extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {row}
-                        {summary}
-                    </tbody>
-                </table>
 
+                        {row}
+
+                    </tbody>
+
+                </table> */}
+
+                {summary}
             </>
         );
     }

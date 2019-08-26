@@ -29,7 +29,7 @@ class SearchConnection extends Component {
 
         const API = `https://transportapi.com/v3/uk/public/journey/from/lonlat:${selectedFromLonlat}/to/lonlat:${selectedToLonlat}/at/${date}/${time}.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast`
 
-        // const API = "https://transportapi.com/v3/uk/public/journey/from/lonlat:-0.134649,51.529258/to/lonlat:-0.088780,51.506383/at/2019-08-23/15:20.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast"
+        // const API = "https://transportapi.com/v3/uk/public/journey/from/lonlat:-0.134649,51.529258/to/lonlat:-0.088780,51.506383/at/2019-08-26/15:20.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast"
 
         fetch(API)
             .then(response => {
@@ -181,6 +181,66 @@ class SearchConnection extends Component {
                     connection={this.state.foundConnection}
                 // stationTo={this.state.stationInputTo}
                 />}
+
+                <div>
+
+
+
+
+
+
+                    <table class="table table-responsive table-hover">
+
+                        <thead>
+                            <tr><th>Column</th><th>Column</th><th>Column</th><th>Column</th></tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-1" aria-expanded="false" aria-controls="group-of-rows-1">
+                                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
+                                <td>aaaaaaaaaaaa</td>
+                                <td>data</td>
+                                <td>aaaaaaaaaaaaaa</td>
+                            </tr>
+                        </tbody>
+
+                        <tbody id="group-of-rows-1" class="collapse">
+                            <tr>
+                                <td>- child row</td>
+                                <td>data 1</td>
+                                <td>aaaaaaaaaaaaaa 1</td>
+                                <td>data 1</td>
+                            </tr>
+                        </tbody>
+
+                        <tbody>
+                            <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-2" aria-expanded="false" aria-controls="group-of-rows-2">
+                                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
+                                <td>data</td>
+                                <td>data</td>
+                                <td>data</td>
+                            </tr>
+                        </tbody>
+
+                        <tbody id="group-of-rows-2" class="collapse">
+                            <tr>
+                                <td>- child row</td>
+                                <td>data 2</td>
+                                <td>data 2</td>
+                                <td>data 2</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+
+
+
+
+
+
+
+
+                </div>
 
             </div>
         );
