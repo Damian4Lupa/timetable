@@ -94,4 +94,8 @@ input.validTime {
 
 tbody.collapse.in {
     display: table-row-group;
-  }
+}
+
+td {
+    cursor: pointer;
+}

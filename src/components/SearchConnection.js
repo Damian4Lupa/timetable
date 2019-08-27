@@ -189,7 +189,7 @@ class SearchConnection extends Component {
 
 
 
-                    <table class="table table-responsive table-hover">
+                    {/* <table class="table table-responsive table-hover">
 
                         <thead>
                             <tr><th>Column</th><th>Column</th><th>Column</th><th>Column</th></tr>
@@ -197,7 +197,7 @@ class SearchConnection extends Component {
 
                         <tbody>
                             <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-1" aria-expanded="false" aria-controls="group-of-rows-1">
-                                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
+                                
                                 <td>aaaaaaaaaaaa</td>
                                 <td>data</td>
                                 <td>aaaaaaaaaaaaaa</td>
@@ -215,7 +215,7 @@ class SearchConnection extends Component {
 
                         <tbody>
                             <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-2" aria-expanded="false" aria-controls="group-of-rows-2">
-                                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
+                               
                                 <td>data</td>
                                 <td>data</td>
                                 <td>data</td>
@@ -231,7 +231,7 @@ class SearchConnection extends Component {
                             </tr>
                         </tbody>
                         
-                    </table>
+                    </table> */}
 
 
 
