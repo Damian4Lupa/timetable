@@ -182,66 +182,6 @@ class SearchConnection extends Component {
                 // stationTo={this.state.stationInputTo}
                 />}
 
-                <div>
-
-
-
-
-
-
-                    {/* <table class="table table-responsive table-hover">
-
-                        <thead>
-                            <tr><th>Column</th><th>Column</th><th>Column</th><th>Column</th></tr>
-                        </thead>
-
-                        <tbody>
-                            <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-1" aria-expanded="false" aria-controls="group-of-rows-1">
-                                
-                                <td>aaaaaaaaaaaa</td>
-                                <td>data</td>
-                                <td>aaaaaaaaaaaaaa</td>
-                            </tr>
-                        </tbody>
-
-                        <tbody id="group-of-rows-1" class="collapse">
-                            <tr>
-                                <td>- child row</td>
-                                <td>data 1</td>
-                                <td>aaaaaaaaaaaaaa 1</td>
-                                <td>data 1</td>
-                            </tr>
-                        </tbody>
-
-                        <tbody>
-                            <tr class="clickable" data-toggle="collapse" data-target="#group-of-rows-2" aria-expanded="false" aria-controls="group-of-rows-2">
-                               
-                                <td>data</td>
-                                <td>data</td>
-                                <td>data</td>
-                            </tr>
-                        </tbody>
-
-                        <tbody id="group-of-rows-2" class="collapse">
-                            <tr>
-                                <td>- child row</td>
-                                <td>data 2</td>
-                                <td>data 2</td>
-                                <td>data 2</td>
-                            </tr>
-                        </tbody>
-                        
-                    </table> */}
-
-
-
-
-
-
-
-
-                </div>
-
             </div>
         );
     }

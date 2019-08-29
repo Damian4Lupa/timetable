@@ -47,49 +47,57 @@ class FoundConnection extends Component {
             [15, "-", "-", "-", "-", "-", "-", "-", "-"],
         ]
 
-        let table = array.slice(0, connectionLength)
+        let result = array.slice(0, connectionLength)
 
-        return table
+        return result
     }
 
-    shortenTablesDetails = () => {
-        let connection = this.props.connection.routes[0].route_parts
-        let connectionLength = (connection.length - 1)
+    // the direction of travel is London
 
-        let array = [
-            [1, "-", "-", "-"],
-            [2, "-", "-", "-"],
-            [3, "-", "-", "-"],
-            [4, "-", "-", "-"],
-            [5, "-", "-", "-"],
-            [6, "-", "-", "-"],
-            [7, "-", "-", "-"],
-            [8, "-", "-", "-"],
-            [9, "-", "-", "-"],
-            [10, "-", "-", "-"],
-            [11, "-", "-", "-"],
-            [12, "-", "-", "-"],
-            [13, "-", "-", "-"],
-            [14, "-", "-", "-"],
-            [15, "-", "-", "-"],
-        ]
+    travelSummary = (duration, table) => {
 
-        let table = array.slice(0, connectionLength)
+        let hours = duration.substring(0, 2)
+        let hoursNumber = +hours
+        let minutes = duration.substring(3, 5)
+        let minutesNumber = +minutes
+        let cost = 0
 
-        return table
+        for (let i = 0; i < table.length; i++) {
+
+            let array = table[i][5]
+            let number = 0
+
+            if (array.length === 2) {
+                let ccc = array.substring(0, 1)
+                let bbb = +ccc
+                number = bbb
+            } else if (array.length === 3) {
+                let ccc = array.substring(0, 2)
+                let bbb = +ccc
+                number = bbb
+            }
+            cost += number
+        }
+
+        const result = <h6 className="ml-3">Total travel time: {`${hoursNumber}h ${minutesNumber}m`}, total cost: {cost}£.</h6>
+
+        return result
     }
 
+    //metoda poprawia wygląd wyświetlania informacji
+    travelTime = () => {
 
 
+//przerzucić dane do state za pomocą komponentu didUpdate. 
+
+    }
 
     render() {
 
         let connection = this.props.connection.routes[0].route_parts
         let duration = this.props.connection.routes[0].duration
         let table = this.shortenTables()
-        // let details = this.shortenTablesDetails()
         let NewConnection = [...connection]
-        // let detailsConnection = [...connection]
 
         for (let i = 0; i < table.length; i++) {
 
@@ -104,18 +112,10 @@ class FoundConnection extends Component {
             table[i][3] = NewConnection[i].mode === "bus" ? `${NewConnection[i].mode} (line: ${NewConnection[i].line_name})` : NewConnection[i].mode
             table[i][4] = NewConnection[i].duration
             table[i][5] = this.showPrice(NewConnection[i].mode, NewConnection[i].duration)
-            table[i][6] = NewConnection[i].destination ? `destination: ${NewConnection[i].destination}` : null
+            table[i][6] = `departure: ${NewConnection[i].departure_time}`
             table[i][7] = `arrival: ${NewConnection[i].arrival_time}`
-            table[i][8] = `departure: ${NewConnection[i].departure_time}`
+            table[i][8] = NewConnection[i].destination ? `destination: ${NewConnection[i].destination}` : null
         }
-
-        // for (let i = 0; i < details.length; i++) {
-
-        //     details[i][0] = ""
-        //     details[i][1] = detailsConnection[i].destination ? `destination: ${detailsConnection[i].destination}` : ""
-        //     details[i][2] = `arrival time: ${detailsConnection[i].arrival_time}`
-        //     details[i][3] = `departure time: ${detailsConnection[i].departure_time}`
-        // }
 
         const row = table.map((table) =>
             <>
@@ -145,24 +145,12 @@ class FoundConnection extends Component {
                         <td>{table[6]}</td>
                         <td>{table[7]}</td>
                         <td>{table[8]}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </>
         )
-
-        // const row2 = details.map((details) =>
-
-        //     <tbody id={`group-of-rows-${table[0]}`} class="collapse">
-        //         <tr>
-        //             <td>{details[0]}</td>
-        //             <td>{details[1]}</td>
-        //             <td>{details[2]}</td>
-        //             <td>{details[3]}</td>
-        //         </tr>
-        //     </tbody>
-        // )
-
-        const summary = <h6>Total travel time: {duration}, total cost: {null}</h6>
 
         return (
             <>
@@ -183,30 +171,8 @@ class FoundConnection extends Component {
 
                 </table>
 
+                {this.travelSummary(duration, table)}
 
-
-
-                {/* <table className="table table-hover text-center mt-5">
-
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">From</th>
-                            <th scope="col">To</th>
-                            <th scope="col">Connection</th>
-                            <th scope="col">Travel time</th>
-                            <th scope="col">Normal price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {row}
-
-                    </tbody>
-
-                </table> */}
-
-                {summary}
             </>
         );
     }
