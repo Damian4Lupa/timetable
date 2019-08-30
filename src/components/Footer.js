@@ -7,11 +7,7 @@ const Footer = () => {
         <>
             <footer className="text-white blue">
                 <div className="container py-5 mt-5">
-
                     <div className="row">
-
-
-
                         <div className="col-3 col-md">
                             <h5>United Kingdom Transport</h5>
                             <ul className="list-unstyled text-small">
@@ -53,10 +49,7 @@ const Footer = () => {
                         <p>© United Kingdom Transport 2019 All rights reserved - The website uses cookies.</p>
                     </div>
                 </div>
-
             </footer>
-
-
         </>
     )
 }

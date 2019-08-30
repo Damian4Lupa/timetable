@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 
 class FoundConnection extends Component {
-    state = {}
+
+    state = {
+        connection: [],
+        duration: ""
+    }
+
+    componentDidMount() {
+        this.setState({
+            connection: this.props.connection.routes[0].route_parts,
+            duration: this.props.connection.routes[0].duration
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevState.connection !== this.state.connection) {
+            this.setState({
+                connection: this.props.connection.routes[0].route_parts,
+                duration: this.props.connection.routes[0].duration
+            })
+        }
+    }
 
     showPrice = (mode, duration) => {
         let price = ""
@@ -52,8 +73,6 @@ class FoundConnection extends Component {
         return result
     }
 
-    // the direction of travel is London
-
     travelSummary = (duration, table) => {
 
         let hours = duration.substring(0, 2)
@@ -79,20 +98,30 @@ class FoundConnection extends Component {
             cost += number
         }
 
-        const result = <h6 className="ml-3">Total travel time: {`${hoursNumber}h ${minutesNumber}m`}, total cost: {cost}£.</h6>
+        const result = <h6 className="ml-5 mt-3">Total travel time: {`${hoursNumber}h ${minutesNumber}m`}, total cost: {cost}£.</h6>
 
         return result
     }
 
-    //metoda poprawia wygląd wyświetlania informacji
-    travelTime = () => {
+    travelTime = (duration) => {
+        let hours = duration.substring(0, 2)
+        let hoursNumber = +hours
+        let minutes = duration.substring(3, 5)
+        let minutesNumber = +minutes
+        let result = ""
 
+        if (hoursNumber === 0) {
+            result = `${minutesNumber}m`
+        } else {
+            result = `${hoursNumber}h ${minutesNumber}m`
+        }
 
-//przerzucić dane do state za pomocą komponentu didUpdate. 
-
+        return result
     }
 
     render() {
+
+        // const { connection, duration } = this.state
 
         let connection = this.props.connection.routes[0].route_parts
         let duration = this.props.connection.routes[0].duration
@@ -101,16 +130,10 @@ class FoundConnection extends Component {
 
         for (let i = 0; i < table.length; i++) {
 
-            if (NewConnection[i].from_point_name.includes("specified point")) {
-                console.log("specified point")
-                // return delete NewConnection[i]
-                // console.log(NewConnection)
-            }
-
             table[i][1] = NewConnection[i].from_point_name
             table[i][2] = NewConnection[i].to_point_name
             table[i][3] = NewConnection[i].mode === "bus" ? `${NewConnection[i].mode} (line: ${NewConnection[i].line_name})` : NewConnection[i].mode
-            table[i][4] = NewConnection[i].duration
+            table[i][4] = this.travelTime(NewConnection[i].duration)
             table[i][5] = this.showPrice(NewConnection[i].mode, NewConnection[i].duration)
             table[i][6] = `departure: ${NewConnection[i].departure_time}`
             table[i][7] = `arrival: ${NewConnection[i].arrival_time}`
@@ -154,7 +177,6 @@ class FoundConnection extends Component {
 
         return (
             <>
-
                 <table class="table table-hover text-center mt-5">
                     <thead>
                         <tr>

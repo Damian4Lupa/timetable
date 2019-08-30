@@ -7,7 +7,6 @@ const SearchFrom = props => {
             value={props.lonlat}
             id={props.id}
             title={props.location}
-        // onClick={props.chosen}
         >
             {props.location}
         </option>

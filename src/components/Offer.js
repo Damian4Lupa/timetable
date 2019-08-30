@@ -7,7 +7,6 @@ const Offer = () => {
     return (
         <div className="container marketing marginTop">
 
-
             <div className="row">
                 <div className="col-lg-4">
                     <img src={promotion} alt="" height="140" />
@@ -32,8 +31,6 @@ const Offer = () => {
                 </div>
             </div>
         </div>
-
-
     )
 }
 

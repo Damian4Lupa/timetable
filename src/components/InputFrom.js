@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SearchFrom from './SearchFrom'
-// const data = require('./data')
 const data = require('../data/location.js')
 
 class InputFrom extends Component {
@@ -13,10 +12,9 @@ class InputFrom extends Component {
     }
 
     componentDidUpdate(previousProps, previousState) {
-        let inputValue = this.state.stationInputFrom //to co wpisuje w input
-        let station = [...data.data] //punkt wejściowy
-
-        let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
+        let inputValue = this.state.stationInputFrom
+        let station = [...data.data]
+        let selectedLocations = []
         let selectedFromLonlat = ''
         let selectedLocationsSize = 0
 
@@ -71,7 +69,6 @@ class InputFrom extends Component {
         this.setState({
             stationInputFrom,
             selectedFrom,
-
         })
         this.props.handleSelectedFrom(selectedFrom)
     }
@@ -89,7 +86,6 @@ class InputFrom extends Component {
             />
         ))
 
-
         let showSelect = false
         let errorMessage = ''
 
@@ -98,16 +94,13 @@ class InputFrom extends Component {
         } else if (stationInputFrom.length >= 3 && selectedLocations.length === 1) {
             showSelect = false
         } else if (selectedLocations.length > 15) {
-            // console.log("reset input")
             this.resetInputFrom()
         } else if (selectedLocations.length === 0 && stationInputFrom.length >= 3) {
             errorMessage = 'There is no such station'
         }
         else showSelect = false
 
-
         return (
-
             <>
                 <input
                     name="stationInputFrom"
@@ -115,7 +108,6 @@ class InputFrom extends Component {
                     value={stationInputFrom}
                     onChange={this.handleChangeData}
                 />
-
                 <div className="form-group mt-3">
 
                     {showSelect && <select
@@ -124,14 +116,10 @@ class InputFrom extends Component {
                         onClick={this.handleSelectedLocationForm}
                     >
                         {searchForm}
-
                     </select>}
                     <center>{errorMessage}</center>
-
                 </div>
             </>
-
-
         );
     }
 }

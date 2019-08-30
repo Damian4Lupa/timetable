@@ -3,9 +3,6 @@ import icon from './img/icon.png'
 
 const Header = () => {
     return (
-
-
-
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm blue">
             <div className="container">
 

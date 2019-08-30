@@ -3,7 +3,6 @@ import InputFrom from './InputFrom'
 import InputTo from './InputTo'
 import DateAndTime from './DateAndTime'
 import FoundConnection from './FoundConnection'
-// const data = require('./data')
 
 class SearchConnection extends Component {
 
@@ -28,8 +27,6 @@ class SearchConnection extends Component {
         const { selectedFromLonlat, selectedToLonlat, time, date } = this.state
 
         const API = `https://transportapi.com/v3/uk/public/journey/from/lonlat:${selectedFromLonlat}/to/lonlat:${selectedToLonlat}/at/${date}/${time}.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast`
-
-        // const API = "https://transportapi.com/v3/uk/public/journey/from/lonlat:-0.134649,51.529258/to/lonlat:-0.088780,51.506383/at/2019-08-26/15:20.json?app_id=66901113&app_key=65d3a215e85ef5745c85521230c46e42&modes=train-bus&service=southeast"
 
         fetch(API)
             .then(response => {
@@ -179,7 +176,6 @@ class SearchConnection extends Component {
 
                 {show_FoundConnection && <FoundConnection
                     connection={this.state.foundConnection}
-                // stationTo={this.state.stationInputTo}
                 />}
 
             </div>

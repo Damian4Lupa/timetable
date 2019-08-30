@@ -13,10 +13,9 @@ class InputFrom extends Component {
     }
 
     componentDidUpdate(previousProps, previousState) {
-        let inputValue = this.state.stationInputTo //to co wpisuje w input
-        let station = [...data.data] //punkt wejściowy
-
-        let selectedLocations = [] //dopasowane lokalizacje po wyszukaniu - do przesłania do state - obiekt z id, locat. i crs po wyszukiwaniu
+        let inputValue = this.state.stationInputTo
+        let station = [...data.data]
+        let selectedLocations = []
         let selectedToLonlat = ''
         let selectedLocationsSize = 0
 
@@ -42,7 +41,6 @@ class InputFrom extends Component {
                 selectedLocationsSize,
                 selectedToLonlat
             })
-
             this.props.handleSelectedToLonlat(selectedToLonlat)
         }
     }
@@ -73,9 +71,7 @@ class InputFrom extends Component {
             stationInputTo,
             selectedTo,
         })
-
         this.props.handleInputTo(selectedTo)
-
     }
 
     render() {
@@ -91,7 +87,6 @@ class InputFrom extends Component {
             />
         ))
 
-
         let showSelect = false
         let errorMessage = ''
 
@@ -100,16 +95,13 @@ class InputFrom extends Component {
         } else if (stationInputTo.length >= 3 && selectedLocations.length === 1) {
             showSelect = false
         } else if (selectedLocations.length > 15) {
-            // console.log("reset input")
             this.resetInputFrom()
         } else if (selectedLocations.length === 0 && stationInputTo.length >= 3) {
             errorMessage = 'There is no such station'
         }
         else showSelect = false
 
-
         return (
-
             <>
                 <input
                     name="stationInputTo"
@@ -119,17 +111,14 @@ class InputFrom extends Component {
                 />
 
                 <div className="form-group mt-3">
-
                     {showSelect && <select
                         className="custom-select custom-select-lg"
                         size={selectedLocationsSize}
                         onClick={this.handleSelectedLocationForm}
                     >
                         {searchForm}
-
                     </select>}
                     <center>{errorMessage}</center>
-
                 </div>
             </>
         );
