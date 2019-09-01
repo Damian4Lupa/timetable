@@ -118,9 +118,13 @@ class SearchConnection extends Component {
 
     render() {
 
+       
+
         const { show_FoundConnection, errorConnetion, loadingData } = this.state
 
         const show_error = <h4 className="text-center mt-4 text-muted">Please select the start and end stations correctly</h4>
+
+       
 
         return (
             <div className="container">
