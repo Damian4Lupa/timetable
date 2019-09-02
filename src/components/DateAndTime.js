@@ -69,7 +69,17 @@ class DateAndTime extends Component {
 
     }
 
-    //! dodać metodę określającą datę 
+    dateAndTime = () => {
+        const { date, time } = this.state
+
+        let day = date.slice(8)
+        let month = date.slice(5).slice(0, 2)
+        let year = date.slice(0, 4)
+
+        let result = `${day}.${month}.${year}  ${time}`
+        // console.log(result)
+        return result
+    }
 
     render() {
 
@@ -78,11 +88,11 @@ class DateAndTime extends Component {
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
 
-        let day = date.slice(8)
-        let month = date.slice(5).slice(0, 2)
-        let year = date.slice(0, 4)
+        // let day = date.slice(8)
+        // let month = date.slice(5).slice(0, 2)
+        // let year = date.slice(0, 4)
 
-        let dateAndTime = `${day}.${month}.${year}  ${time}`
+        // let dateAndTime = `${day}.${month}.${year}  ${time}`
 
         let sendData = this.props.chosen
 
@@ -91,7 +101,7 @@ class DateAndTime extends Component {
                 <input
                     name="dateITime"
                     className="validTime form-control form-control-lg" type="text"
-                    value={dateAndTime}
+                    value={this.dateAndTime()}
                     onChange={sendData}
                     onClick={this.handleChangedateITime}
                 />
