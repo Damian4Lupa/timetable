@@ -88,12 +88,6 @@ class DateAndTime extends Component {
         let maxDate = this.minDate.slice(0, 4) * 1 + 1
         maxDate = maxDate + "-12-31"
 
-        // let day = date.slice(8)
-        // let month = date.slice(5).slice(0, 2)
-        // let year = date.slice(0, 4)
-
-        // let dateAndTime = `${day}.${month}.${year}  ${time}`
-
         let sendData = this.props.chosen
 
         return (

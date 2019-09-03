@@ -7,6 +7,10 @@ h5 {
     margin-bottom: 15px
 }
 
+.marginTop {
+    margin-top: 10rem;
+}
+
 .blue {
     background-color: #303C6C
 }
@@ -33,12 +37,6 @@ h5 {
     -ms-user-select: none;
     user-select: none;
 }
-
-.marginTop {
-    margin-top: 10rem
-}
-
-
 
 input.validFrom {
     padding-right: 10px;
@@ -99,11 +97,3 @@ tbody.collapse.in {
 .clickable td {
     cursor: pointer;
 }
-
-/* .hide {
-    display: none
-}
-
-.active {
-    display: inline-block
-} */

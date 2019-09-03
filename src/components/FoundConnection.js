@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from "jquery"
 
 class FoundConnection extends Component {
 
@@ -109,16 +108,15 @@ class FoundConnection extends Component {
         return result
     }
 
-    showButton() {
-        $('.ticked').mouseenter(() => {
-            this.setState({
-                showButton: true
-            })
+    showButtonTrue = () => {
+        this.setState({
+            showButton: true
         })
-        $('.ticked').mouseleave(() => {
-            this.setState({
-                showButton: false
-            })
+    }
+
+    showButtonFalse = () => {
+        this.setState({
+            showButton: false
         })
     }
 
@@ -132,7 +130,7 @@ class FoundConnection extends Component {
 
         for (let i = 0; i < table.length; i++) {
 
-            let content = showButton ? <button type="button" className="btn btn-danger form-control ticked">buy a ticket</button> : <span className="ticked"><small>buy a ticket</small><br />{this.showPrice(NewConnection[i].mode, NewConnection[i].duration)}</span>
+            let content = showButton ? <button type="button" className="btn btn-danger form-control" onMouseLeave={this.showButtonFalse}>buy a ticket</button> : <span onMouseEnter={this.showButtonTrue}><small>buy a ticket</small><br />{this.showPrice(NewConnection[i].mode, NewConnection[i].duration)}</span>
 
             let duration = NewConnection[i].mode === "train" ? content : this.showPrice(NewConnection[i].mode, NewConnection[i].duration)
 
@@ -182,28 +180,22 @@ class FoundConnection extends Component {
             </>
         )
 
-        this.showButton()
-
         return (
             <>
-                <table className="table table-hover text-center mt-5">
+                <table className="table table-hover text-center my-5">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col-3">From</th>
                             <th scope="col-3">To</th>
                             <th scope="col-3">Connection</th>
-                            <th scope="col-1">Travel time</th>
-                            <th scope="col-1">Normal price</th>
+                            <th scope="col">Travel time</th>
+                            <th scope="col-2">Normal price</th>
                         </tr>
                     </thead>
-
                     {row}
-
                 </table>
-
                 {this.travelSummary(duration, table)}
-
             </>
         );
     }

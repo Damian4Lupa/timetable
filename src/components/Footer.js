@@ -15,7 +15,6 @@ const Footer = () => {
                                 <li><a className="text-muted" href="#">Join us!</a></li>
                                 <li><a className="text-muted" href="#">What our clients say about us</a></li>
                                 <li><a className="text-muted" href="#">International train tickets</a></li>
-
                             </ul>
                         </div>
                         <div className="col-3 col-md">
