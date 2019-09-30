@@ -41,7 +41,7 @@ class SearchConnection extends Component {
             .then(response => response.json())
             .then(data => {
 
-                console.log(data)
+                // console.log(data)
 
                 this.setState({
                     foundConnection: data,
@@ -93,7 +93,6 @@ class SearchConnection extends Component {
                 errorConnetion: false
             })
         }, 2500);
-
     }
 
     handleButtonLoading = () => {
@@ -105,8 +104,6 @@ class SearchConnection extends Component {
     handleButtonSearch = () => {
 
         const { selectedFrom, selectedTo } = this.state
-
-        // this.downloadTimetable()
 
         if (selectedFrom !== '' && selectedTo !== '') {
             this.handleButtonLoading()
@@ -121,6 +118,8 @@ class SearchConnection extends Component {
         const { show_FoundConnection, errorConnetion, loadingData } = this.state
 
         const show_error = <h4 className="text-center mt-4 text-muted">Please select the start and end stations correctly</h4>
+
+        // console.log(this.state.foundConnection.routes)
 
         return (
             <div className="container">
@@ -147,7 +146,6 @@ class SearchConnection extends Component {
                             onClick={this.handleButtonSearch}
                         >
                             Find your connection
-                            {/* FIND YOUR CONNECTION */}
                         </button>}
 
                         {loadingData && <button
@@ -156,7 +154,6 @@ class SearchConnection extends Component {
                         >
                             <span className="spinner-border spinner-border-sm mr-2 mb-1" role="status" aria-hidden="true"></span>
                             Loading...
-                            {/* LOADING... */}
                         </button>}
                     </div>
                 </div>

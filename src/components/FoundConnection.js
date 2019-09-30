@@ -10,11 +10,11 @@ class FoundConnection extends Component {
         let price = ""
         let number = parseInt(duration)
 
-        if (mode === "foot") {
+        if (mode === "foot" || mode === "taxi") {
             return "-"
         }
 
-        if (mode === "bus" || mode === "dlr") {
+        if (mode === "bus" || mode === "dlr" || mode === "tube") {
             price = 2
         } else if (mode === "train" && number >= 6 && number < 8) {
             price = 30
@@ -34,21 +34,21 @@ class FoundConnection extends Component {
         let connectionLength = (connection.length - 1)
 
         let array = [
-            [1, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [2, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [3, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [4, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [5, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [6, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [7, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [8, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [9, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [10, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [11, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [12, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [13, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [14, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            [15, "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [1, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [2, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [3, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [4, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [5, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [6, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [7, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [8, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [9, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [10, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [11, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [12, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [13, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [14, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [15, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
         ]
 
         let result = array.slice(0, connectionLength)
@@ -109,15 +109,50 @@ class FoundConnection extends Component {
     }
 
     showButtonTrue = () => {
+
         this.setState({
             showButton: true
         })
+
     }
 
     showButtonFalse = () => {
+
         this.setState({
             showButton: false
         })
+
+    }
+
+    changeStyle = duration => {
+
+        let style = ""
+
+        if (duration === "train") {
+            if (this.state.showButton) {
+                style = "buyTicked"
+            } else {
+                style = "#f8f9fa"
+            }
+        } else {
+            style = "#f8f9fa"
+        }
+
+        return style
+    }
+
+    sortTable = () => {
+
+        // 0: {duration: "07:21:00", route_parts: Array(9), departure_time: "22:17", arrival_time: "05:38", arrival_date: "2019-09-30"}
+        // 1: {duration: "08:47:00", route_parts: Array(8), departure_time: "22:17", arrival_time: "07:04", arrival_date: "2019-09-30"}
+        // 2: {duration: "07:36:00", route_parts: Array(7), departure_time: "00:17", departure_date: "2019-09-30", arrival_time: "07:53", …}
+        // 3: {duration: "07:38:00", route_parts: Array(6), departure_time: "00:17", departure_date: "2019-09-30", arrival_time: "07:55", …}
+        // 4: {duration: "03:17:00", route_parts: Array(4), departure_time: "06:03", departure_date: "2019-09-30", arrival_time: "09:20", …}
+        // length: 5
+
+        
+
+        
     }
 
     render() {
@@ -128,21 +163,30 @@ class FoundConnection extends Component {
         let table = this.shortenTables()
         let NewConnection = [...connection]
 
+        this.sortTable()
+
         for (let i = 0; i < table.length; i++) {
 
-            let content = showButton ? <button type="button" className="btn btn-danger form-control" onMouseLeave={this.showButtonFalse}>buy a ticket</button> : <span onMouseEnter={this.showButtonTrue}><small>buy a ticket</small><br />{this.showPrice(NewConnection[i].mode, NewConnection[i].duration)}</span>
+            const buttonOn = <span>buy a ticket</span>
+            const buttonOff = <span>
+                {this.showPrice(NewConnection[i].mode, NewConnection[i].duration)}
+            </span>
+            let content = showButton ? buttonOn : buttonOff
 
             let duration = NewConnection[i].mode === "train" ? content : this.showPrice(NewConnection[i].mode, NewConnection[i].duration)
 
+            let modeBus = NewConnection[i].mode === "bus" ? `${NewConnection[i].mode} (line: ${NewConnection[i].line_name})` : NewConnection[i].mode
+
             table[i][1] = NewConnection[i].from_point_name
             table[i][2] = NewConnection[i].to_point_name
-            table[i][3] = NewConnection[i].mode === "bus" ? `${NewConnection[i].mode} (line: ${NewConnection[i].line_name})` : NewConnection[i].mode
+            table[i][3] = NewConnection[i].mode === "taxi" ? "foot" : modeBus
             table[i][4] = this.travelTime(NewConnection[i].duration)
             table[i][5] = duration
             table[i][6] = `departure: ${NewConnection[i].departure_time}`
             table[i][7] = `arrival: ${NewConnection[i].arrival_time}`
             table[i][8] = NewConnection[i].destination ? `destination: ${NewConnection[i].destination}` : null
             table[i][9] = this.showPrice(NewConnection[i].mode, NewConnection[i].duration)
+            table[i][10] = NewConnection[i].mode
         }
 
         const row = table.map((table) =>
@@ -160,7 +204,13 @@ class FoundConnection extends Component {
                         <td>{table[2]}</td>
                         <td>{table[3]}</td>
                         <td>{table[4]}</td>
-                        <td>{table[5]}</td>
+                        <td
+                            className={this.changeStyle(table[10])}
+                            onMouseLeave={this.showButtonFalse}
+                            onMouseEnter={this.showButtonTrue}
+                        >
+                            {table[5]}
+                        </td>
                     </tr>
                 </tbody>
 
