@@ -122,48 +122,53 @@ class SearchConnection extends Component {
         // console.log(this.state.foundConnection.routes)
 
         return (
-            <div className="container">
-                <div className="row marginTop">
-                    <div className="col">
-                        <InputFrom
-                            handleSelectedFrom={this.handleSelectedFrom}
-                            handleSelectedFromLonlat={this.handleSelectedFromLonlat}
-                        />
-                    </div>
-                    <div className="col">
-                        <InputTo
-                            handleInputTo={this.handleInputTo}
-                            handleSelectedToLonlat={this.handleSelectedToLonlat}
-                        />
-                    </div>
-                    <div className="col">
-                        <DateAndTime handleDateAndTime={this.handleDateAndTime} />
-                    </div>
-                    <div className="col">
-                        {loadingData || <button
-                            type="button"
-                            className="btn btn-danger form-control form-control-lg"
-                            onClick={this.handleButtonSearch}
-                        >
-                            Find your connection
+            <div className="foto-header">
+
+                <img className="foto-background" alt="foto-background" />
+
+                <div className="container">
+                    <div className="row marginTop">
+                        <div className="col">
+                            <InputFrom
+                                handleSelectedFrom={this.handleSelectedFrom}
+                                handleSelectedFromLonlat={this.handleSelectedFromLonlat}
+                            />
+                        </div>
+                        <div className="col">
+                            <InputTo
+                                handleInputTo={this.handleInputTo}
+                                handleSelectedToLonlat={this.handleSelectedToLonlat}
+                            />
+                        </div>
+                        <div className="col">
+                            <DateAndTime handleDateAndTime={this.handleDateAndTime} />
+                        </div>
+                        <div className="col">
+                            {loadingData || <button
+                                type="button"
+                                className="btn btn-danger form-control form-control-lg"
+                                onClick={this.handleButtonSearch}
+                            >
+                                Find your connection
                         </button>}
 
-                        {loadingData && <button
-                            type="button"
-                            className="btn btn-danger form-control form-control-lg"
-                        >
-                            <span className="spinner-border spinner-border-sm mr-2 mb-1" role="status" aria-hidden="true"></span>
-                            Loading...
+                            {loadingData && <button
+                                type="button"
+                                className="btn btn-danger form-control form-control-lg"
+                            >
+                                <span className="spinner-border spinner-border-sm mr-2 mb-1" role="status" aria-hidden="true"></span>
+                                Loading...
                         </button>}
+                        </div>
                     </div>
-                </div>
-                <div>
-                    {errorConnetion && show_error}
-                </div>
+                    <div>
+                        {errorConnetion && show_error}
+                    </div>
 
-                {show_FoundConnection && <FoundConnection
-                    connection={this.state.foundConnection}
-                />}
+                    {show_FoundConnection && <FoundConnection
+                        connection={this.state.foundConnection}
+                    />}
+                </div>
             </div>
         );
     }

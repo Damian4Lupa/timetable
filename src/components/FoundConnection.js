@@ -150,9 +150,45 @@ class FoundConnection extends Component {
         // 4: {duration: "03:17:00", route_parts: Array(4), departure_time: "06:03", departure_date: "2019-09-30", arrival_time: "09:20", …}
         // length: 5
 
-        
+        let connection = this.props.connection.routes
 
-        
+        // let byDate = connection.slice(0);
+
+        // byDate.sort(function (a, b) {
+        //     return a.route_parts.length - b.route_parts.length;
+        // });
+
+        // console.log("1", byDate)
+        // parseInt(duration)
+
+        function sortObject(obj) {
+            var arr = [];
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    let number = parseInt(obj[prop].duration)
+                    arr.push({
+                        'key': prop,
+                        'value': number,
+                        'duration': obj[prop].duration,
+                        'route_parts': obj[prop].route_parts,
+                        'departure_time': obj[prop].departure_time,
+                        'arrival_time': obj[prop].arrival_time,
+                        'arrival_date': obj[prop].arrival_date,
+                    
+                    });
+                }
+            }
+            arr.sort(function (a, b) { return a.value - b.value; });
+            //arr.sort(function(a, b) { a.value.toLowerCase().localeCompare(b.value.toLowerCase()); }); //use this to sort as strings
+            return arr; // returns array
+        }
+
+        // var list = {"you": 100, "me": 75, "foo": 116, "bar": 15};
+        var arr = sortObject(connection);
+
+        console.log(arr)
+
+
     }
 
     render() {

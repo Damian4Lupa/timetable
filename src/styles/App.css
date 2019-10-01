@@ -7,10 +7,6 @@ h5 {
     margin-bottom: 15px
 }
 
-.marginTop {
-    margin-top: 10rem;
-}
-
 .blue {
     background-color: #303C6C
 }
@@ -101,4 +97,23 @@ tbody.collapse.in {
 .buyTicked {
     background-color: #dc3545;
     color: white;
+}
+
+/* .foto-background {
+    z-index: 2;
+} */
+
+.marginTop {
+    margin-top: 13rem;
+}
+
+.foto-header {
+    height: 65vh;
+    background-image: url('../components/img/train1.jpg');
+    background-position: center;
+    /* background-position: 100% 100%; */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* position: relative; */
+    background-size: cover;
 }
