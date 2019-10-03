@@ -174,7 +174,7 @@ class FoundConnection extends Component {
                         'departure_time': obj[prop].departure_time,
                         'arrival_time': obj[prop].arrival_time,
                         'arrival_date': obj[prop].arrival_date,
-                    
+
                     });
                 }
             }
@@ -186,7 +186,7 @@ class FoundConnection extends Component {
         // var list = {"you": 100, "me": 75, "foo": 116, "bar": 15};
         var arr = sortObject(connection);
 
-        console.log(arr)
+        console.log("sort", arr)
 
 
     }

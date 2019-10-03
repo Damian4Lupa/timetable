@@ -1,0 +1,39 @@
+.foto-header-bus1 {
+    height: 65vh;
+    background-image: url('../components/img/bus1.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.foto-header-train1 {
+    height: 65vh;
+    background-image: url('../components/img/train1.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.foto-header-train2 {
+    height: 65vh;
+    background-image: url('../components/img/train2.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.foto-header-train3 {
+    height: 65vh;
+    background-image: url('../components/img/train3.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.foto-header-train4 {
+    height: 65vh;
+    background-image: url('../components/img/train4.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery'
 import InputFrom from './InputFrom'
 import InputTo from './InputTo'
 import DateAndTime from './DateAndTime'
@@ -113,6 +114,56 @@ class SearchConnection extends Component {
         }
     }
 
+    changeFotoHaeder = () => {
+        let className = ""
+
+        const style = [
+            { id: 1, value: "foto-header-bus1" },
+            { id: 2, value: "foto-header-train1" },
+            { id: 3, value: "foto-header-train2" },
+            { id: 4, value: "foto-header-train3" },
+            { id: 4, value: "foto-header-train4" }
+        ]
+
+        const index = Math.floor(Math.random() * 4 + 1)
+
+        className = style[index].value
+
+        return className
+    }
+
+    changeDisplay = () => {
+
+        if (this.state.show_FoundConnection) {
+
+            if ($('#foto-header').hasClass('foto-header-bus1')) {
+                $('.foto-header-bus1').css("display", "none")
+            } else if ($('#foto-header').hasClass('foto-header-train1')) {
+                $('.foto-header-train1').css("display", "none")
+            } else if ($('#foto-header').hasClass('foto-header-train2')) {
+                $('.foto-header-train2').css("display", "none")
+            } else if ($('#foto-header').hasClass('foto-header-train3')) {
+                $('.foto-header-train3').css("display", "none")
+            } else if ($('#foto-header').hasClass('foto-header-train4')) {
+                $('.foto-header-train4').css("display", "none")
+            }
+
+
+
+
+
+
+
+            // $('#foto-header').css("display", "none")
+            // console.log("działa display none")
+        }
+
+        // $('#foto-header').css("display", "block")
+        // console.log("działa display block")
+
+
+    }
+
     render() {
 
         const { show_FoundConnection, errorConnetion, loadingData } = this.state
@@ -122,7 +173,7 @@ class SearchConnection extends Component {
         // console.log(this.state.foundConnection.routes)
 
         return (
-            <div className="foto-header">
+            <div id="foto-header" className={this.changeFotoHaeder()} value={this.changeDisplay()}>
 
                 <img className="foto-background" alt="foto-background" />
 
