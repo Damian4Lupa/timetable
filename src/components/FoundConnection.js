@@ -56,6 +56,34 @@ class FoundConnection extends Component {
         return result
     }
 
+    shortenTables22 = () => {
+        let connection = this.props.sortConnection[0].route_parts
+        // let connection = this.state.connection
+        let connectionLength = (connection.length - 1)
+
+        let array = [
+            [1, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [2, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [3, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [4, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [5, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [6, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [7, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [8, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [9, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [10, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [11, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [12, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [13, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [14, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            [15, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+        ]
+
+        let result = array.slice(0, connectionLength)
+        console.log("shortenTables22", result)
+        return result
+    }
+
     totalCost = (table) => {
 
         let cost = 0
@@ -187,19 +215,15 @@ class FoundConnection extends Component {
         var arr = sortObject(connection);
 
         console.log("sort", arr)
-
-
     }
 
     render() {
 
         let showButton = this.state.showButton
-        let connection = this.props.connection.routes[0].route_parts
-        let duration = this.props.connection.routes[0].duration
-        let table = this.shortenTables()
+        let connection = this.props.sortConnection[0].route_parts
+        let duration = this.props.sortConnection[0].duration
+        let table = this.shortenTables22()
         let NewConnection = [...connection]
-
-        this.sortTable()
 
         for (let i = 0; i < table.length; i++) {
 

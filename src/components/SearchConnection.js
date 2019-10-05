@@ -18,9 +18,31 @@ class SearchConnection extends Component {
         selectedToLonlat: '',
 
         foundConnection: [],
+        sortConnection: [],
+
+        changeBackground: false,
+        changeBackgroundEnd: false,
+        fotoHeader: "",
         show_FoundConnection: false,
         errorConnetion: false,
         loadingData: false,
+    }
+
+    interval = 0
+
+    componentDidMount = () => {
+        this.changeFotoHaeder()
+
+        this.interval = setInterval(() => {
+            this.changeFotoHaeder()
+        }, 15000);
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+
+        if (prevState.selectedFrom !== this.state.selectedFrom) {
+            clearInterval(this.interval)
+        }
     }
 
     downloadTimetable = () => {
@@ -42,10 +64,15 @@ class SearchConnection extends Component {
             .then(response => response.json())
             .then(data => {
 
-                // console.log(data)
+                // let connection = data.routes
+
+                let test = this.sortTable(data.routes)
+
+                console.log("sort table in parent", test)
 
                 this.setState({
                     foundConnection: data,
+                    sortConnection: test,
                     show_FoundConnection: true,
                     loadingData: false
                 })
@@ -109,6 +136,8 @@ class SearchConnection extends Component {
         if (selectedFrom !== '' && selectedTo !== '') {
             this.handleButtonLoading()
             this.downloadTimetable()
+            // this.handleShowFoundConnection()
+
         } else {
             this.handleErrorConnetion()
         }
@@ -129,7 +158,9 @@ class SearchConnection extends Component {
 
         className = style[index].value
 
-        return className
+        this.setState({
+            fotoHeader: className
+        })
     }
 
     changeDisplay = () => {
@@ -137,43 +168,74 @@ class SearchConnection extends Component {
         if (this.state.show_FoundConnection) {
 
             if ($('#foto-header').hasClass('foto-header-bus1')) {
-                $('.foto-header-bus1').css("display", "none")
+                $('#foto-header').attr('class', 'display-none')
+                // $('#foto-header').removeClass('foto-header-bus1').addClass('display-none')
+                // $('#foto-header').addClass('display-none')
             } else if ($('#foto-header').hasClass('foto-header-train1')) {
-                $('.foto-header-train1').css("display", "none")
+                $('#foto-header').attr('class', 'display-none')
+                // $('#foto-header').removeClass('foto-header-train1').addClass('display-none')
+                // $('#foto-header').addClass('display-none')
             } else if ($('#foto-header').hasClass('foto-header-train2')) {
-                $('.foto-header-train2').css("display", "none")
+                $('#foto-header').attr('class', 'display-none')
+                // $('#foto-header').removeClass('foto-header-train2').addClass('display-none')
+                // $('#foto-header').addClass('display-none')
             } else if ($('#foto-header').hasClass('foto-header-train3')) {
-                $('.foto-header-train3').css("display", "none")
+                $('#foto-header').attr('class', 'display-none')
+                // $('#foto-header').removeClass('foto-header-train3').addClass('display-none')
+                // $('#foto-header').addClass('display-none')
             } else if ($('#foto-header').hasClass('foto-header-train4')) {
-                $('.foto-header-train4').css("display", "none")
+                $('#foto-header').attr('class', 'display-none')
+                // $('#foto-header').removeClass('foto-header-train4').addClass('display-none')
+                // $('#foto-header').addClass('display-none')
             }
+        }
+    }
 
+    sortTable = connection => {
 
+        // let connection = this.state.foundConnection.routes
 
+        function sortObject(obj) {
+            var arr = [];
+            for (let prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    let number = parseInt(obj[prop].duration)
+                    arr.push({
+                        'key': prop,
+                        'value': number,
+                        'duration': obj[prop].duration,
+                        'mode': obj[prop].mode,
+                        'line_name': obj[prop].line_name,
+                        'destination': obj[prop].destination,
+                        'from_point_name': obj[prop].from_point_name,
+                        'to_point_name': obj[prop].to_point_name,
+                        'route_parts': obj[prop].route_parts,
+                        'departure_time': obj[prop].departure_time,
+                        'arrival_time': obj[prop].arrival_time,
+                        'arrival_date': obj[prop].arrival_date,
+                    });
+                }
+            }
+            arr.sort(function (a, b) { return a.value - b.value; });
 
-
-
-
-            // $('#foto-header').css("display", "none")
-            // console.log("działa display none")
+            return arr;
         }
 
-        // $('#foto-header').css("display", "block")
-        // console.log("działa display block")
+        let arr = sortObject(connection);
 
+        console.log("sort", arr)
 
+        return arr
     }
 
     render() {
 
-        const { show_FoundConnection, errorConnetion, loadingData } = this.state
+        const { show_FoundConnection, errorConnetion, loadingData, fotoHeader } = this.state
 
         const show_error = <h4 className="text-center mt-4 text-muted">Please select the start and end stations correctly</h4>
 
-        // console.log(this.state.foundConnection.routes)
-
         return (
-            <div id="foto-header" className={this.changeFotoHaeder()} value={this.changeDisplay()}>
+            <div id="foto-header" className={fotoHeader} display={this.changeDisplay()}>
 
                 <img className="foto-background" alt="foto-background" />
 
@@ -218,6 +280,7 @@ class SearchConnection extends Component {
 
                     {show_FoundConnection && <FoundConnection
                         connection={this.state.foundConnection}
+                        sortConnection={this.state.sortConnection}
                     />}
                 </div>
             </div>
