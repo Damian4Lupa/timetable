@@ -1,10 +1,16 @@
 ## United Kingdom Transport
 
-Application in preparation
+The application searches for connections between cities (bus and train), sorts data and displays the fastest connection.
 
-Search and display the best connection (bus and train) between the major cities of the UK (London, Birmingham, Glasgow, Sheffield, Manchester, Edinburgh, Liverpool, Bristol and Cardiff). At each stage of the journey, it displays the duration and approximate cost.
+Connection searches operate between the 10 largest cities in Great Britain: London, Birmingham, Glasgow, Sheffield, Manchester, Edinburgh, Liverpool, Bristol and Cardiff. The base can be expanded.
+
+At each stage of the journey, the application displays its duration and approximate cost.
 
 The application uses the https://www.transportapi.com/ API
+
+### download files 
+
+Clone a repository with git clone <repository URL>
 
 ### `npm install`
 
