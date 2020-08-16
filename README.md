@@ -1,4 +1,4 @@
-## United Kingdom Transport
+# United Kingdom Transport
 
 This aplication allows you to search for connections between cities (bus and train), it sorts data and display the fastest connection.
 
@@ -8,18 +8,20 @@ During each stage of the journey application displays its duration and approxima
 
 The application uses the https://www.transportapi.com/ API
 
-### download files 
+## See like it looks like
 
-Clone a repository with git clone <repository URL>
+https://damian4lupa.github.io/timetable/
 
-### `npm install`
+## How to start 
 
-Download all packages needed to run
+ 1. Clone a repository with `git clone <repository URL>`,
+ 2. Run `npm install` and download all packages necessary to run the project,
+ 3. Run `npm start`,
+ 4. See the effect.
 
-### `npm start`
+## Technologies used:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+[![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)]()
+[![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3)]()
+[![JavaScript](https://img.shields.io/badge/-JavaScript-yellow?style=flat-square&logo=javascript&logoColor=white)]()
+[![React](https://img.shields.io/badge/-React-61dafb?style=flat-square&logo=react&logoColor=white)]()
