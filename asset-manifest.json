@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/timetable/static/css/main.e76ae1cc.chunk.css",
-    "main.js": "/timetable/static/js/main.cc106c5c.chunk.js",
-    "main.js.map": "/timetable/static/js/main.cc106c5c.chunk.js.map",
-    "runtime~main.js": "/timetable/static/js/runtime~main.d9458ee0.js",
-    "runtime~main.js.map": "/timetable/static/js/runtime~main.d9458ee0.js.map",
-    "static/css/2.22a7d4ef.chunk.css": "/timetable/static/css/2.22a7d4ef.chunk.css",
-    "static/js/2.0bc230b0.chunk.js": "/timetable/static/js/2.0bc230b0.chunk.js",
-    "static/js/2.0bc230b0.chunk.js.map": "/timetable/static/js/2.0bc230b0.chunk.js.map",
+    "main.css": "/timetable/static/css/main.81815ef7.chunk.css",
+    "main.js": "/timetable/static/js/main.436ceaec.chunk.js",
+    "main.js.map": "/timetable/static/js/main.436ceaec.chunk.js.map",
+    "runtime-main.js": "/timetable/static/js/runtime-main.b0053ee1.js",
+    "runtime-main.js.map": "/timetable/static/js/runtime-main.b0053ee1.js.map",
+    "static/css/2.8aa5a7f8.chunk.css": "/timetable/static/css/2.8aa5a7f8.chunk.css",
+    "static/js/2.2d70ca58.chunk.js": "/timetable/static/js/2.2d70ca58.chunk.js",
+    "static/js/2.2d70ca58.chunk.js.map": "/timetable/static/js/2.2d70ca58.chunk.js.map",
     "index.html": "/timetable/index.html",
-    "precache-manifest.1ac852fbdf3d7f153f97ce5784617b7f.js": "/timetable/precache-manifest.1ac852fbdf3d7f153f97ce5784617b7f.js",
+    "precache-manifest.76b13f71f7813bb60798a54c88272228.js": "/timetable/precache-manifest.76b13f71f7813bb60798a54c88272228.js",
     "service-worker.js": "/timetable/service-worker.js",
-    "static/css/2.22a7d4ef.chunk.css.map": "/timetable/static/css/2.22a7d4ef.chunk.css.map",
-    "static/css/main.e76ae1cc.chunk.css.map": "/timetable/static/css/main.e76ae1cc.chunk.css.map",
+    "static/css/2.8aa5a7f8.chunk.css.map": "/timetable/static/css/2.8aa5a7f8.chunk.css.map",
+    "static/css/main.81815ef7.chunk.css.map": "/timetable/static/css/main.81815ef7.chunk.css.map",
+    "static/js/2.2d70ca58.chunk.js.LICENSE.txt": "/timetable/static/js/2.2d70ca58.chunk.js.LICENSE.txt",
     "static/media/appstore.png": "/timetable/static/media/appstore.d983de31.png",
     "static/media/foto-header.css": "/timetable/static/media/train4.5771e2dc.jpg",
     "static/media/googlepay.png": "/timetable/static/media/googlepay.b756cfcc.png",
@@ -20,5 +21,12 @@
     "static/media/payment.png": "/timetable/static/media/payment.f6db607e.png",
     "static/media/promotion.png": "/timetable/static/media/promotion.40fcd5d6.png",
     "static/media/security.png": "/timetable/static/media/security.5d64bd88.png"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b0053ee1.js",
+    "static/css/2.8aa5a7f8.chunk.css",
+    "static/js/2.2d70ca58.chunk.js",
+    "static/css/main.81815ef7.chunk.css",
+    "static/js/main.436ceaec.chunk.js"
+  ]
 }
