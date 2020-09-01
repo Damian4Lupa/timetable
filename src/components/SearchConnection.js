@@ -64,8 +64,6 @@ class SearchConnection extends Component {
             .then(response => response.json())
             .then(data => {
 
-                // let connection = data.routes
-
                 let test = this.sortTable(data.routes)
 
                 console.log("sort table in parent", test)
@@ -104,7 +102,6 @@ class SearchConnection extends Component {
     }
 
     handleDateAndTime = (date, time) => {
-        // console.log(date, time)
         this.setState({
             date,
             time
@@ -136,7 +133,6 @@ class SearchConnection extends Component {
         if (selectedFrom !== '' && selectedTo !== '') {
             this.handleButtonLoading()
             this.downloadTimetable()
-            // this.handleShowFoundConnection()
 
         } else {
             this.handleErrorConnetion()
@@ -169,31 +165,24 @@ class SearchConnection extends Component {
 
             if ($('#foto-header').hasClass('foto-header-bus1')) {
                 $('#foto-header').attr('class', 'display-none')
-                // $('#foto-header').removeClass('foto-header-bus1').addClass('display-none')
-                // $('#foto-header').addClass('display-none')
+              
             } else if ($('#foto-header').hasClass('foto-header-train1')) {
                 $('#foto-header').attr('class', 'display-none')
-                // $('#foto-header').removeClass('foto-header-train1').addClass('display-none')
-                // $('#foto-header').addClass('display-none')
+               
             } else if ($('#foto-header').hasClass('foto-header-train2')) {
                 $('#foto-header').attr('class', 'display-none')
-                // $('#foto-header').removeClass('foto-header-train2').addClass('display-none')
-                // $('#foto-header').addClass('display-none')
+               
             } else if ($('#foto-header').hasClass('foto-header-train3')) {
                 $('#foto-header').attr('class', 'display-none')
-                // $('#foto-header').removeClass('foto-header-train3').addClass('display-none')
-                // $('#foto-header').addClass('display-none')
+                
             } else if ($('#foto-header').hasClass('foto-header-train4')) {
                 $('#foto-header').attr('class', 'display-none')
-                // $('#foto-header').removeClass('foto-header-train4').addClass('display-none')
-                // $('#foto-header').addClass('display-none')
+                
             }
         }
     }
 
     sortTable = connection => {
-
-        // let connection = this.state.foundConnection.routes
 
         function sortObject(obj) {
             var arr = [];

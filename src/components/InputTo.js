@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SearchTo from './SearchFrom'
-// const data = require('./data')
 const data = require('../data/location.js')
 
 class InputFrom extends Component {

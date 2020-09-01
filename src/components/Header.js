@@ -3,11 +3,11 @@ import icon from './img/icon.png'
 
 const Header = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm blue">
+        <nav className="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm blue" aria-labelledby="primary-navigation">
             <div className="container">
 
                 <a className="navbar-brand" href="#">
-                    <img src={icon} width="35" height="35" className="d-inline-block align-top mr-2" alt="icon" />
+                    <img src={icon} width="35" height="35" className="d-inline-block align-top mr-2" alt="project icon" />
                     United Kingdom Transport
                     </a>
 

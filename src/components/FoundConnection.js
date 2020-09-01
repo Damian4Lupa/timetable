@@ -30,7 +30,6 @@ class FoundConnection extends Component {
 
     shortenTables = () => {
         let connection = this.props.connection.routes[0].route_parts
-        // let connection = this.state.connection
         let connectionLength = (connection.length - 1)
 
         let array = [
@@ -171,23 +170,7 @@ class FoundConnection extends Component {
 
     sortTable = () => {
 
-        // 0: {duration: "07:21:00", route_parts: Array(9), departure_time: "22:17", arrival_time: "05:38", arrival_date: "2019-09-30"}
-        // 1: {duration: "08:47:00", route_parts: Array(8), departure_time: "22:17", arrival_time: "07:04", arrival_date: "2019-09-30"}
-        // 2: {duration: "07:36:00", route_parts: Array(7), departure_time: "00:17", departure_date: "2019-09-30", arrival_time: "07:53", …}
-        // 3: {duration: "07:38:00", route_parts: Array(6), departure_time: "00:17", departure_date: "2019-09-30", arrival_time: "07:55", …}
-        // 4: {duration: "03:17:00", route_parts: Array(4), departure_time: "06:03", departure_date: "2019-09-30", arrival_time: "09:20", …}
-        // length: 5
-
         let connection = this.props.connection.routes
-
-        // let byDate = connection.slice(0);
-
-        // byDate.sort(function (a, b) {
-        //     return a.route_parts.length - b.route_parts.length;
-        // });
-
-        // console.log("1", byDate)
-        // parseInt(duration)
 
         function sortObject(obj) {
             var arr = [];
@@ -207,11 +190,10 @@ class FoundConnection extends Component {
                 }
             }
             arr.sort(function (a, b) { return a.value - b.value; });
-            //arr.sort(function(a, b) { a.value.toLowerCase().localeCompare(b.value.toLowerCase()); }); //use this to sort as strings
-            return arr; // returns array
+     
+            return arr;
         }
 
-        // var list = {"you": 100, "me": 75, "foo": 116, "bar": 15};
         var arr = sortObject(connection);
 
         console.log("sort", arr)

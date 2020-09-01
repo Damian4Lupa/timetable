@@ -77,7 +77,6 @@ class DateAndTime extends Component {
         let year = date.slice(0, 4)
 
         let result = `${day}.${month}.${year}  ${time}`
-        // console.log(result)
         return result
     }
 

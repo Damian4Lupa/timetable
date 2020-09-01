@@ -4,36 +4,48 @@ import appStore from './img/appstore.png'
 
 const Footer = () => {
     return (
-        <>
+
             <footer className="text-white blue">
                 <div className="container py-5 mt-5">
                     <div className="row">
                         <div className="col-3 col-md">
+                        <header>
                             <h5>United Kingdom Transport</h5>
+                            </header>
+                            <nav aria-labelledby="footer-navigation-main-section">
                             <ul className="list-unstyled text-small">
-                                <li><a className="text-muted" href="#">KOLEO calendars</a></li>
+                                <li><a className="text-muted" href="#">Calendars</a></li>
                                 <li><a className="text-muted" href="#">Join us!</a></li>
                                 <li><a className="text-muted" href="#">What our clients say about us</a></li>
                                 <li><a className="text-muted" href="#">International train tickets</a></li>
                             </ul>
+                            </nav>
                         </div>
                         <div className="col-3 col-md">
+                        <header>
                             <h5>For passengers</h5>
+                            </header>
+                            <nav aria-labelledby="footer-navigation-for-passengers">
                             <ul className="list-unstyled text-small">
                                 <li><a className="text-muted" href="#">Current timetable</a></li>
                                 <li><a className="text-muted" href="#">Train ticket prices</a></li>
                                 <li><a className="text-muted" href="#">Android app</a></li>
                                 <li><a className="text-muted" href="#">Popular connections</a></li>
                             </ul>
+                            </nav>
                         </div>
                         <div className="col-3 col-md">
+                        <header>
                             <h5>Useful information</h5>
+                          </header>
+                            <nav aria-labelledby="footer-navigation-useful-information">
                             <ul className="list-unstyled text-small">
                                 <li><a className="text-muted" href="#">Help</a></li>
                                 <li><a className="text-muted" href="#">Terms of service</a></li>
                                 <li><a className="text-muted" href="#">Privacy/Cookies</a></li>
                                 <li><a className="text-muted" href="#">Contact us</a></li>
                             </ul>
+                            </nav>
                         </div>
                         <div className="col-3 col-md">
                             <a href="https://play.google.com/store" target="_blank">
@@ -49,7 +61,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-        </>
+     
     )
 }
 
