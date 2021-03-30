@@ -1,16 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const SearchTo = props => {
+const SearchTo = (props) => {
+  return (
+    <option value={props.lonlat} id={props.location} title={props.location}>
+      {props.location}
+    </option>
+  );
+};
 
-    return (
-        <option
-            value={props.lonlat}
-            id={props.location}
-            title={props.location}
-        >
-            {props.location}
-        </option>
-    )
-}
-
-export default SearchTo
+export default SearchTo;

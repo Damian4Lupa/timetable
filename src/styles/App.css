@@ -1,116 +1,116 @@
 body {
-    background-color: #f8f9fa !important;
-    color: #5a5a5a;
+  background-color: #f8f9fa !important;
+  color: #5a5a5a;
 }
 
 h5 {
-    margin-bottom: 15px
+  margin-bottom: 15px;
 }
 
 .blue {
-    background-color: #303C6C
+  background-color: #303c6c;
 }
 
 .justify {
-    text-align: justify
+  text-align: justify;
 }
 
 .marketing .col-lg-4 {
-    margin-bottom: 1.5rem;
-    text-align: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .marketing .col-lg-4 p {
-    margin-right: .75rem;
-    margin-left: .75rem;
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
 }
 
 .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 input.validFrom {
-    padding-right: 10px;
-    padding-left: 40px;
-    background-image: url('../components/img/from.png');
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-    background-position: left center;
+  padding-right: 10px;
+  padding-left: 40px;
+  background-image: url("../components/img/from.png");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: left center;
 }
 
 input.validTo {
-    padding-right: 10px;
-    padding-left: 40px;
-    background-image: url('../components/img/to.png');
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-    background-position: left center;
+  padding-right: 10px;
+  padding-left: 40px;
+  background-image: url("../components/img/to.png");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: left center;
 }
 
 input.validCalendar {
-    padding-right: 5px;
-    padding-left: 35px;
-    text-align: center;
-    background-image: url('../components/img/calendar.png');
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-    background-position: left center;
+  padding-right: 5px;
+  padding-left: 35px;
+  text-align: center;
+  background-image: url("../components/img/calendar.png");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: left center;
 }
 
 input.validClock {
-    padding-right: 5px;
-    padding-left: 35px;
-    text-align: center;
-    background-image: url('../components/img/clock.png');
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-    background-position: left center;
+  padding-right: 5px;
+  padding-left: 35px;
+  text-align: center;
+  background-image: url("../components/img/clock.png");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: left center;
 }
 
 input.validTime {
-    padding-right: 5px;
-    padding-left: 35px;
-    text-align: center;
-    background-image: url('../components/img/time.png');
-    background-repeat: no-repeat;
-    background-size: 32px;
-    background-position: left center;
+  padding-right: 5px;
+  padding-left: 35px;
+  text-align: center;
+  background-image: url("../components/img/time.png");
+  background-repeat: no-repeat;
+  background-size: 32px;
+  background-position: left center;
 }
 
 .grey {
-    color: black
+  color: black;
 }
 
 tbody.collapse.in {
-    display: table-row-group;
+  display: table-row-group;
 }
 
 .clickable td {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .buyTicked {
-    background-color: #dc3545;
-    color: white;
+  background-color: #dc3545;
+  color: white;
 }
 
 .marginTop {
-    margin-top: 13rem;
+  margin-top: 13rem;
 }
 
 .display-none {
-    margin-top: -5rem
+  margin-top: -5rem;
 }
 
 .foto-header {
-    height: 65vh;
-    background-image: url('../components/img/train4.jpg');
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
+  height: 65vh;
+  background-image: url("../components/img/train4.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
