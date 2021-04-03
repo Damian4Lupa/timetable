@@ -1,39 +1,105 @@
-.foto-header-bus1 {
+.foto-header-1 {
   height: 65vh;
-  background-image: url("../components/img/bus1.jpg");
+  background-image: url("../components/img/bus1-1500.jpg");
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.foto-header-train1 {
+.foto-header-2 {
   height: 65vh;
-  background-image: url("../components/img/train1.jpg");
+  background-image: url("../components/img/train1-1500.jpg");
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.foto-header-train2 {
+.foto-header-3 {
   height: 65vh;
-  background-image: url("../components/img/train2.jpg");
+  background-image: url("../components/img/train2-1500.jpg");
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.foto-header-train3 {
+.foto-header-4 {
   height: 65vh;
-  background-image: url("../components/img/train3.jpg");
+  background-image: url("../components/img/train3-1500.jpg");
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.foto-header-train4 {
+.foto-header-5 {
   height: 65vh;
-  background-image: url("../components/img/train4.jpg");
+  background-image: url("../components/img/train4-1500.jpg");
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+}
+
+@media (min-width: 1440px) {
+  .foto-header-1 {
+    background-image: url("../components/img/bus1-1500.jpg");
+  }
+
+  .foto-header-2 {
+    background-image: url("../components/img/train1-1500.jpg");
+  }
+
+  .foto-header-3 {
+    background-image: url("../components/img/train2-1500.jpg");
+  }
+
+  .foto-header-4 {
+    background-image: url("../components/img/train3-1500.jpg");
+  }
+
+  .foto-header-5 {
+    background-image: url("../components/img/train4-1500.jpg");
+  }
+}
+
+@media (max-width: 800px) {
+  .foto-header-1 {
+    background-image: url("../components/img/bus1-1000.jpg");
+  }
+
+  .foto-header-2 {
+    background-image: url("../components/img/train1-1000.jpg");
+  }
+
+  .foto-header-3 {
+    background-image: url("../components/img/train2-1000.jpg");
+  }
+
+  .foto-header-4 {
+    background-image: url("../components/img/train3-1000.jpg");
+  }
+
+  .foto-header-5 {
+    background-image: url("../components/img/train4-1000.jpg");
+  }
+}
+
+@media (max-width: 414px) {
+  .foto-header-1 {
+    background-image: url("../components/img/bus1-500.jpg");
+  }
+
+  .foto-header-2 {
+    background-image: url("../components/img/train1-500.jpg");
+  }
+
+  .foto-header-3 {
+    background-image: url("../components/img/train2-500.jpg");
+  }
+
+  .foto-header-4 {
+    background-image: url("../components/img/train3-500.jpg");
+  }
+
+  .foto-header-5 {
+    background-image: url("../components/img/train4-500.jpg");
+  }
 }
