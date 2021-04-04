@@ -21,7 +21,7 @@ class SearchConnection extends Component {
 
     changeBackground: false,
     changeBackgroundEnd: false,
-    fotoHeader: "",
+    fotoHeaderIndex: 5,
     show_FoundConnection: false,
     errorConnetion: false,
     loadingData: false,
@@ -30,10 +30,8 @@ class SearchConnection extends Component {
   interval = 0;
 
   componentDidMount = () => {
-    this.changeFotoHaeder();
-
     this.interval = setInterval(() => {
-      this.changeFotoHaeder();
+      this.generateIndex();
     }, 15000);
   };
 
@@ -71,6 +69,15 @@ class SearchConnection extends Component {
           loadingData: false,
         });
       });
+  };
+
+  generateIndex = () => {
+    let fotoHeaderIndex = 0;
+    fotoHeaderIndex = Math.floor(Math.random() * 5 + 1);
+
+    this.setState({
+      fotoHeaderIndex,
+    });
   };
 
   handleSelectedFrom = (selectedFrom) => {
@@ -133,26 +140,6 @@ class SearchConnection extends Component {
     }
   };
 
-  changeFotoHaeder = () => {
-    let className = "";
-
-    const style = [
-      { id: 1, value: "foto-header-bus1" },
-      { id: 2, value: "foto-header-train1" },
-      { id: 3, value: "foto-header-train2" },
-      { id: 4, value: "foto-header-train3" },
-      { id: 4, value: "foto-header-train4" },
-    ];
-
-    const index = Math.floor(Math.random() * 4 + 1);
-
-    className = style[index].value;
-
-    this.setState({
-      fotoHeader: className,
-    });
-  };
-
   changeDisplay = () => {
     if (this.state.show_FoundConnection) {
       if ($("#foto-header").hasClass("foto-header-bus1")) {
@@ -210,7 +197,7 @@ class SearchConnection extends Component {
       show_FoundConnection,
       errorConnetion,
       loadingData,
-      fotoHeader,
+      fotoHeaderIndex,
     } = this.state;
 
     const show_error = (
@@ -222,7 +209,7 @@ class SearchConnection extends Component {
     return (
       <div
         id="foto-header"
-        className={fotoHeader}
+        className={`foto-header-${fotoHeaderIndex}`}
         display={this.changeDisplay()}
       >
         <img className="foto-background" alt="foto-background" />
