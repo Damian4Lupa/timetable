@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import $ from "jquery";
 import SearchFrom from "./SearchFrom";
 const data = require("../data/location.js");
 
@@ -9,6 +10,7 @@ class InputFrom extends Component {
     selectedLocationsSize: 0,
     selectedFrom: "",
     selectedFromLonlat: "",
+    fotoHeaderDisplayNone: false,
   };
 
   componentDidUpdate(previousProps, previousState) {
@@ -22,6 +24,12 @@ class InputFrom extends Component {
       selectedLocations = station.filter((item) =>
         item.location.includes(inputValue)
       );
+
+      if ($("#foto-header").hasClass("display-none")) {
+        this.setState({
+          fotoHeaderDisplayNone: true,
+        });
+      }
 
       if (selectedLocations.length > 5) {
         selectedLocationsSize = 5;
@@ -80,6 +88,7 @@ class InputFrom extends Component {
       selectedLocationsSize,
       selectedLocations,
       selectedFrom,
+      fotoHeaderDisplayNone,
     } = this.state;
 
     let searchForm = selectedLocations.map((item) => (
@@ -93,6 +102,7 @@ class InputFrom extends Component {
 
     let showSelect = false;
     let errorMessage = "";
+    let errorMessageStyle = fotoHeaderDisplayNone ? null : "text-white";
 
     if (
       stationInputFrom.length >= 3 &&
@@ -128,7 +138,7 @@ class InputFrom extends Component {
               {searchForm}
             </select>
           )}
-          <center>{errorMessage}</center>
+          <center className={errorMessageStyle}>{errorMessage}</center>
         </div>
       </>
     );
