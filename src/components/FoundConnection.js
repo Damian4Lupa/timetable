@@ -28,35 +28,7 @@ class FoundConnection extends Component {
   };
 
   shortenTables = () => {
-    let connection = this.props.connection.routes[0].route_parts;
-    let connectionLength = connection.length - 1;
-
-    let array = [
-      [1, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [2, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [3, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [4, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [5, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [6, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [7, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [8, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [9, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [10, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [11, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [12, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [13, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [14, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-      [15, "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"],
-    ];
-
-    let result = array.slice(0, connectionLength);
-
-    return result;
-  };
-
-  shortenTables22 = () => {
     let connection = this.props.sortConnection[0].route_parts;
-    // let connection = this.state.connection
     let connectionLength = connection.length - 1;
 
     let array = [
@@ -78,10 +50,10 @@ class FoundConnection extends Component {
     ];
 
     let result = array.slice(0, connectionLength);
-    console.log("shortenTables22", result);
     return result;
   };
 
+  //!poprawić nazwy zmiennych
   totalCost = (table) => {
     let cost = 0;
 
@@ -186,20 +158,16 @@ class FoundConnection extends Component {
       arr.sort(function (a, b) {
         return a.value - b.value;
       });
-
       return arr;
     }
-
     var arr = sortObject(connection);
-
-    console.log("sort", arr);
   };
 
   render() {
     let showButton = this.state.showButton;
     let connection = this.props.sortConnection[0].route_parts;
     let duration = this.props.sortConnection[0].duration;
-    let table = this.shortenTables22();
+    let table = this.shortenTables();
     let NewConnection = [...connection];
 
     for (let i = 0; i < table.length; i++) {
@@ -224,56 +192,35 @@ class FoundConnection extends Component {
       table[i][1] = NewConnection[i].from_point_name;
       table[i][2] = NewConnection[i].to_point_name;
       table[i][3] = NewConnection[i].mode === "taxi" ? "foot" : modeBus;
-      table[i][4] = this.travelTime(NewConnection[i].duration);
-      table[i][5] = duration;
-      table[i][6] = `departure: ${NewConnection[i].departure_time}`;
-      table[i][7] = `arrival: ${NewConnection[i].arrival_time}`;
-      table[i][8] = NewConnection[i].destination
-        ? `destination: ${NewConnection[i].destination}`
-        : null;
-      table[i][9] = this.showPrice(
+      table[i][4] = `dep. ${NewConnection[i].departure_time} \n arr. ${NewConnection[i].arrival_time}`;
+      table[i][5] = this.travelTime(NewConnection[i].duration);
+
+      table[i][6] = duration;
+      table[i][7] = this.showPrice(
         NewConnection[i].mode,
         NewConnection[i].duration
       );
-      table[i][10] = NewConnection[i].mode;
+      table[i][8] = NewConnection[i].mode;
     }
 
     const row = table.map((table) => (
-      <>
-        <tbody>
-          <tr
-            className="clickable"
-            data-toggle="collapse"
-            data-target={`#group-of-rows-${table[0]}`}
-            aria-expanded="false"
-            aria-controls={`group-of-rows-${table[0]}`}
+      <tbody>
+        <tr>
+          <td>{table[0]}</td>
+          <td>{table[1]}</td>
+          <td>{table[2]}</td>
+          <td>{table[3]}</td>
+          <td>{table[4]}</td>
+          <td>{table[5]}</td>
+          <td
+            className={this.changeStyle(table[8])}
+            onMouseLeave={this.showButtonFalse}
+            onMouseEnter={this.showButtonTrue}
           >
-            <td>{table[0]}</td>
-            <td>{table[1]}</td>
-            <td>{table[2]}</td>
-            <td>{table[3]}</td>
-            <td>{table[4]}</td>
-            <td
-              className={this.changeStyle(table[10])}
-              onMouseLeave={this.showButtonFalse}
-              onMouseEnter={this.showButtonTrue}
-            >
-              {table[5]}
-            </td>
-          </tr>
-        </tbody>
-
-        <tbody id={`group-of-rows-${table[0]}`} className="collapse text-muted">
-          <tr>
-            <td></td>
-            <td>{table[6]}</td>
-            <td>{table[7]}</td>
-            <td>{table[8]}</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </>
+            {table[6]}
+          </td>
+        </tr>
+      </tbody>
     ));
 
     return (
@@ -285,7 +232,8 @@ class FoundConnection extends Component {
               <th scope="col-3">From</th>
               <th scope="col-3">To</th>
               <th scope="col-3">Connection</th>
-              <th scope="col">Travel time</th>
+              <th scope="col-3">Time</th>
+              <th scope="col">Duration</th>
               <th scope="col-2">Normal price</th>
             </tr>
           </thead>
