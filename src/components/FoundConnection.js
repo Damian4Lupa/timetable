@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import bus from "../components/img/bus.svg";
+import foot from "../components/img/foot.svg";
+import taxi from "../components/img/taxi.svg";
+import train from "../components/img/train.svg";
 
 class FoundConnection extends Component {
   state = {
@@ -84,7 +88,6 @@ class FoundConnection extends Component {
         {this.totalCost(table)}£.
       </span>
     );
-
     return result;
   };
 
@@ -159,6 +162,26 @@ class FoundConnection extends Component {
     var arr = sortObject(connection);
   };
 
+  modeTravelIcon = (mode, lineName) => {
+    let view = "";
+    let height = "25";
+
+    if (mode == "taxi") {
+      view = <img src={taxi} alt="" height={height} />;
+    } else if (mode == "train") {
+      view = <img src={train} alt="" height={height} />;
+    } else if (mode == "bus") {
+      view = (
+        <span>
+          <img src={bus} alt="" height={height} /> <br /> line: {lineName}
+        </span>
+      );
+    } else {
+      view = <img src={foot} alt="" height={height} />;
+    }
+    return view;
+  };
+
   render() {
     let showButton = this.state.showButton;
     let connection = this.props.sortConnection[0].route_parts;
@@ -180,18 +203,15 @@ class FoundConnection extends Component {
           ? content
           : this.showPrice(NewConnection[i].mode, NewConnection[i].duration);
 
-      let modeBus =
-        NewConnection[i].mode === "bus"
-          ? `${NewConnection[i].mode} (line: ${NewConnection[i].line_name})`
-          : NewConnection[i].mode;
-
       table[i][1] = NewConnection[i].from_point_name;
       table[i][2] = NewConnection[i].to_point_name;
-      table[i][3] = NewConnection[i].mode === "taxi" ? "foot" : modeBus;
+      table[i][3] = this.modeTravelIcon(
+        NewConnection[i].mode,
+        NewConnection[i].line_name
+      );
       table[i][4] = `dep. ${NewConnection[i].departure_time}`;
       table[i][9] = `arr. ${NewConnection[i].arrival_time}`;
       table[i][5] = this.travelTime(NewConnection[i].duration);
-
       table[i][6] = duration;
       table[i][7] = this.showPrice(
         NewConnection[i].mode,
@@ -230,10 +250,10 @@ class FoundConnection extends Component {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col-3">From</th>
-              <th scope="col-3">To</th>
+              <th scope="col-2">From</th>
+              <th scope="col-2">To</th>
               <th scope="col-3">Connection</th>
-              <th scope="col-4">Time</th>
+              <th scope="col-5">Time</th>
               <th scope="col">Duration</th>
               <th scope="col">Normal price</th>
             </tr>
