@@ -53,26 +53,22 @@ class FoundConnection extends Component {
     return result;
   };
 
-  //!poprawić nazwy zmiennych
   totalCost = (table) => {
     let cost = 0;
 
     for (let i = 0; i < table.length; i++) {
-      let array = table[i][9];
+      let array = table[i][7];
       let number = 0;
 
       if (array.length === 2) {
-        let ccc = array.substring(0, 1);
-        let bbb = +ccc;
-        number = bbb;
+        let newArray = array.substring(0, 1);
+        number = +newArray;
       } else if (array.length === 3) {
-        let ccc = array.substring(0, 2);
-        let bbb = +ccc;
-        number = bbb;
+        let newArray = array.substring(0, 2);
+        number = +newArray;
       }
       cost += number;
     }
-
     return cost;
   };
 
@@ -83,10 +79,10 @@ class FoundConnection extends Component {
     let minutesNumber = +minutes;
 
     const result = (
-      <h6 className="ml-5 mt-4">
+      <span className="travelSummary">
         Total travel time: {`${hoursNumber}h ${minutesNumber}m`}, total cost:{" "}
         {this.totalCost(table)}£.
-      </h6>
+      </span>
     );
 
     return result;
@@ -192,7 +188,8 @@ class FoundConnection extends Component {
       table[i][1] = NewConnection[i].from_point_name;
       table[i][2] = NewConnection[i].to_point_name;
       table[i][3] = NewConnection[i].mode === "taxi" ? "foot" : modeBus;
-      table[i][4] = `dep. ${NewConnection[i].departure_time} \n arr. ${NewConnection[i].arrival_time}`;
+      table[i][4] = `dep. ${NewConnection[i].departure_time}`;
+      table[i][9] = `arr. ${NewConnection[i].arrival_time}`;
       table[i][5] = this.travelTime(NewConnection[i].duration);
 
       table[i][6] = duration;
@@ -210,7 +207,11 @@ class FoundConnection extends Component {
           <td>{table[1]}</td>
           <td>{table[2]}</td>
           <td>{table[3]}</td>
-          <td>{table[4]}</td>
+          <td>
+            {table[4]}
+            <br />
+            {table[9]}
+          </td>
           <td>{table[5]}</td>
           <td
             className={this.changeStyle(table[8])}
@@ -225,16 +226,16 @@ class FoundConnection extends Component {
 
     return (
       <>
-        <table className="table table-hover text-center my-5">
+        <table className="table table-hover text-center my-4">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col-3">From</th>
               <th scope="col-3">To</th>
               <th scope="col-3">Connection</th>
-              <th scope="col-3">Time</th>
+              <th scope="col-4">Time</th>
               <th scope="col">Duration</th>
-              <th scope="col-2">Normal price</th>
+              <th scope="col">Normal price</th>
             </tr>
           </thead>
           {row}

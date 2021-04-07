@@ -15,6 +15,22 @@ h5 {
   text-align: justify;
 }
 
+.text-center {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.travelSummary {
+  margin-left: 3rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
   text-align: center;
