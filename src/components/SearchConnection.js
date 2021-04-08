@@ -25,20 +25,56 @@ class SearchConnection extends Component {
     show_FoundConnection: false,
     errorConnetion: false,
     loadingData: false,
+    searchIcon: false,
+    windowWidth: 0,
+    fotoHeaderDisplayNone: false,
   };
 
   interval = 0;
 
   componentDidMount = () => {
+    this.checkWindowWidth();
     this.interval = setInterval(() => {
       this.generateIndex();
     }, 15000);
   };
 
   componentDidUpdate = (prevProps, prevState) => {
+    window.addEventListener("resize", this.checkWindowWidth);
+
+    if ($("#foto-header").hasClass("display-none")) {
+      this.setState({
+        fotoHeaderDisplayNone: true,
+      });
+    }
+
+    if (prevState.windowWidth !== this.state.windowWidth) {
+      this.handleSearchIcon(this.state.windowWidth);
+    }
+
     if (prevState.selectedFrom !== this.state.selectedFrom) {
       clearInterval(this.interval);
     }
+  };
+
+  handleSearchIcon = (windowWidth) => {
+    if (windowWidth < 1000) {
+      this.setState({
+        searchIcon: true,
+      });
+    } else {
+      this.setState({
+        searchIcon: false,
+      });
+    }
+  };
+
+  checkWindowWidth = () => {
+    let windowWidth = 0;
+    windowWidth = $(window).width();
+    this.setState({
+      windowWidth,
+    });
   };
 
   downloadTimetable = () => {
@@ -142,15 +178,15 @@ class SearchConnection extends Component {
 
   changeDisplay = () => {
     if (this.state.show_FoundConnection) {
-      if ($("#foto-header").hasClass("foto-header-bus1")) {
+      if ($("#foto-header").hasClass("foto-header-1")) {
         $("#foto-header").attr("class", "display-none");
-      } else if ($("#foto-header").hasClass("foto-header-train1")) {
+      } else if ($("#foto-header").hasClass("foto-header-2")) {
         $("#foto-header").attr("class", "display-none");
-      } else if ($("#foto-header").hasClass("foto-header-train2")) {
+      } else if ($("#foto-header").hasClass("foto-header-3")) {
         $("#foto-header").attr("class", "display-none");
-      } else if ($("#foto-header").hasClass("foto-header-train3")) {
+      } else if ($("#foto-header").hasClass("foto-header-4")) {
         $("#foto-header").attr("class", "display-none");
-      } else if ($("#foto-header").hasClass("foto-header-train4")) {
+      } else if ($("#foto-header").hasClass("foto-header-5")) {
         $("#foto-header").attr("class", "display-none");
       }
     }
@@ -198,12 +234,36 @@ class SearchConnection extends Component {
       errorConnetion,
       loadingData,
       fotoHeaderIndex,
+      searchIcon,
+      fotoHeaderDisplayNone,
     } = this.state;
 
+    let errorMessageStyle = fotoHeaderDisplayNone
+      ? "text-center mt-4 text-muted"
+      : "text-center mt-4 text-white";
+
     const show_error = (
-      <h4 className="text-center mt-4 text-muted">
+      <h4 className={errorMessageStyle}>
         Please select the start and end stations correctly
       </h4>
+    );
+
+    const buttonLargeScreen = (
+      <button
+        type="button"
+        className="btn btn-danger form-control form-control-lg"
+        onClick={this.handleButtonSearch}
+      >
+        Find your connection
+      </button>
+    );
+
+    const buttonSmallScreen = (
+      <button
+        type="button"
+        className="btn btn-danger form-control form-control-lg button-small-screen"
+        onClick={this.handleButtonSearch}
+      ></button>
     );
 
     return (
@@ -232,15 +292,8 @@ class SearchConnection extends Component {
               <DateAndTime handleDateAndTime={this.handleDateAndTime} />
             </div>
             <div className="col">
-              {loadingData || (
-                <button
-                  type="button"
-                  className="btn btn-danger form-control form-control-lg"
-                  onClick={this.handleButtonSearch}
-                >
-                  Find your connection
-                </button>
-              )}
+              {loadingData ||
+                (searchIcon ? buttonSmallScreen : buttonLargeScreen)}
 
               {loadingData && (
                 <button
