@@ -26,10 +26,24 @@ h5 {
   padding: 0.4rem;
 }
 
+th.col,
+th.col-2,
+th.col-3,
+th.col-5 {
+  width: 0;
+}
+
 .travelSummary {
   margin-left: 3rem;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.button-small-screen {
+  background-image: url("../components/img/search.svg");
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: center;
 }
 
 .marketing .col-lg-4 {
@@ -130,4 +144,99 @@ tbody.collapse.in {
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+}
+
+@media (max-width: 801px) {
+  .marginTop {
+    margin-top: 11.5rem;
+  }
+
+  .form-control-lg {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .col {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .button-small-screen {
+    background-size: 23px 23px;
+  }
+}
+
+@media (max-width: 602px) {
+  .marginTop {
+    margin-top: 10rem;
+  }
+
+  .col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  input.validTime {
+    padding-left: 40px;
+  }
+
+  .col-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 15px;
+    padding-left: 40px;
+  }
+  .col-3:last-child {
+    padding-left: 37px;
+  }
+}
+
+@media (max-width: 415px) {
+  .col-3 {
+    padding-right: 15px;
+    padding-left: 20px;
+  }
+  .col-3:last-child {
+    padding-left: 17px;
+  }
+}
+
+@media (max-width: 376px) {
+  .marginTop {
+    margin-top: 11rem;
+  }
+  .col-3 {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-3:last-child {
+    padding-left: 12px;
+  }
+
+  .navbar-brand {
+    margin-right: 1rem;
+    font-size: 1.1rem;
+  }
+  .travelSummary {
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 361px) {
+  .col-3 {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-3:last-child {
+    padding-left: 1px;
+  }
+  input.validTime {
+    padding-left: 35px;
+  }
 }
