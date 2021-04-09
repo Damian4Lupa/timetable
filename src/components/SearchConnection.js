@@ -35,7 +35,7 @@ class SearchConnection extends Component {
     this.checkWindowWidth();
     this.interval = setInterval(() => {
       this.generateIndex();
-    }, 15000);
+    }, 20000);
   };
 
   componentDidUpdate = (prevProps, prevState) => {

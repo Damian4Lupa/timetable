@@ -166,11 +166,11 @@ class FoundConnection extends Component {
     let view = "";
     let height = "25";
 
-    if (mode == "taxi") {
+    if (mode === "taxi") {
       view = <img src={taxi} alt="" height={height} />;
-    } else if (mode == "train") {
+    } else if (mode === "train") {
       view = <img src={train} alt="" height={height} />;
-    } else if (mode == "bus") {
+    } else if (mode === "bus") {
       view = (
         <span>
           <img src={bus} alt="" height={height} /> <br /> line: {lineName}
@@ -245,23 +245,23 @@ class FoundConnection extends Component {
     ));
 
     return (
-      <>
+      <div className="table-responsive">
         <table className="table table-hover text-center my-4">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col-2">From</th>
-              <th scope="col-2">To</th>
-              <th scope="col-3">Connection</th>
-              <th scope="col-5">Time</th>
-              <th scope="col">Duration</th>
-              <th scope="col">Normal price</th>
+              <th className="col">#</th>
+              <th className="col-2">From</th>
+              <th className="col-2">To</th>
+              <th className="col-3">Connection</th>
+              <th className="col-5">Time</th>
+              <th className="col">Duration</th>
+              <th className="col">Normal price</th>
             </tr>
           </thead>
           {row}
         </table>
         {this.travelSummary(duration, table)}
-      </>
+      </div>
     );
   }
 }
