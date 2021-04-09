@@ -27,7 +27,6 @@ class SearchConnection extends Component {
     loadingData: false,
     searchIcon: false,
     windowWidth: 0,
-    fotoHeaderDisplayNone: false,
   };
 
   interval = 0;
@@ -41,12 +40,6 @@ class SearchConnection extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     window.addEventListener("resize", this.checkWindowWidth);
-
-    if ($("#foto-header").hasClass("display-none")) {
-      this.setState({
-        fotoHeaderDisplayNone: true,
-      });
-    }
 
     if (prevState.windowWidth !== this.state.windowWidth) {
       this.handleSearchIcon(this.state.windowWidth);
@@ -235,10 +228,11 @@ class SearchConnection extends Component {
       loadingData,
       fotoHeaderIndex,
       searchIcon,
-      fotoHeaderDisplayNone,
+      selectedTo,
+      selectedFrom,
     } = this.state;
 
-    let errorMessageStyle = fotoHeaderDisplayNone
+    let errorMessageStyle = $("#foto-header").hasClass("display-none")
       ? "text-center mt-4 text-muted"
       : "text-center mt-4 text-white";
 
@@ -258,6 +252,15 @@ class SearchConnection extends Component {
       </button>
     );
 
+    const buttonLargeScreenDisabled = (
+      <button
+        type="button"
+        className="btn btn-danger form-control form-control-lg disabled"
+      >
+        Find your connection
+      </button>
+    );
+
     const buttonSmallScreen = (
       <button
         type="button"
@@ -265,6 +268,17 @@ class SearchConnection extends Component {
         onClick={this.handleButtonSearch}
       ></button>
     );
+
+    const buttonSmallScreenDisabled = (
+      <button
+        type="button"
+        className="btn btn-danger form-control form-control-lg button-small-screen disabled"
+      ></button>
+    );
+
+    const SmallScreen = selectedFrom === selectedTo ? buttonSmallScreenDisabled : buttonSmallScreen;
+
+    const LargeScreen = selectedFrom === selectedTo ? buttonLargeScreenDisabled : buttonLargeScreen;
 
     return (
       <div
@@ -292,8 +306,7 @@ class SearchConnection extends Component {
               <DateAndTime handleDateAndTime={this.handleDateAndTime} />
             </div>
             <div className="col">
-              {loadingData ||
-                (searchIcon ? buttonSmallScreen : buttonLargeScreen)}
+              {loadingData || (searchIcon ? SmallScreen : LargeScreen)}
 
               {loadingData && (
                 <button
