@@ -1,32 +1,37 @@
 {
   "files": {
-    "main.css": "/timetable/static/css/main.81815ef7.chunk.css",
-    "main.js": "/timetable/static/js/main.436ceaec.chunk.js",
-    "main.js.map": "/timetable/static/js/main.436ceaec.chunk.js.map",
+    "main.css": "/timetable/static/css/main.5c39b919.chunk.css",
+    "main.js": "/timetable/static/js/main.a83688cc.chunk.js",
+    "main.js.map": "/timetable/static/js/main.a83688cc.chunk.js.map",
     "runtime-main.js": "/timetable/static/js/runtime-main.b0053ee1.js",
     "runtime-main.js.map": "/timetable/static/js/runtime-main.b0053ee1.js.map",
     "static/css/2.8aa5a7f8.chunk.css": "/timetable/static/css/2.8aa5a7f8.chunk.css",
-    "static/js/2.2d70ca58.chunk.js": "/timetable/static/js/2.2d70ca58.chunk.js",
-    "static/js/2.2d70ca58.chunk.js.map": "/timetable/static/js/2.2d70ca58.chunk.js.map",
+    "static/js/2.354e4b8e.chunk.js": "/timetable/static/js/2.354e4b8e.chunk.js",
+    "static/js/2.354e4b8e.chunk.js.map": "/timetable/static/js/2.354e4b8e.chunk.js.map",
     "index.html": "/timetable/index.html",
-    "precache-manifest.76b13f71f7813bb60798a54c88272228.js": "/timetable/precache-manifest.76b13f71f7813bb60798a54c88272228.js",
+    "precache-manifest.9a876aca42dd6da0f04297b1c37935ed.js": "/timetable/precache-manifest.9a876aca42dd6da0f04297b1c37935ed.js",
     "service-worker.js": "/timetable/service-worker.js",
     "static/css/2.8aa5a7f8.chunk.css.map": "/timetable/static/css/2.8aa5a7f8.chunk.css.map",
-    "static/css/main.81815ef7.chunk.css.map": "/timetable/static/css/main.81815ef7.chunk.css.map",
-    "static/js/2.2d70ca58.chunk.js.LICENSE.txt": "/timetable/static/js/2.2d70ca58.chunk.js.LICENSE.txt",
-    "static/media/appstore.png": "/timetable/static/media/appstore.d983de31.png",
-    "static/media/foto-header.css": "/timetable/static/media/train4.5771e2dc.jpg",
-    "static/media/googlepay.png": "/timetable/static/media/googlepay.b756cfcc.png",
+    "static/css/main.5c39b919.chunk.css.map": "/timetable/static/css/main.5c39b919.chunk.css.map",
+    "static/js/2.354e4b8e.chunk.js.LICENSE.txt": "/timetable/static/js/2.354e4b8e.chunk.js.LICENSE.txt",
+    "static/media/appstore.png": "/timetable/static/media/appstore.1b9afd66.png",
+    "static/media/bus.svg": "/timetable/static/media/bus.e0176b25.svg",
+    "static/media/foto-header.css": "/timetable/static/media/train4-500.39adf5bc.jpg",
+    "static/media/foot.svg": "/timetable/static/media/foot.63bf125a.svg",
+    "static/media/googlepay.png": "/timetable/static/media/googlepay.c4d93592.png",
     "static/media/icon.png": "/timetable/static/media/icon.1c150d56.png",
     "static/media/payment.png": "/timetable/static/media/payment.f6db607e.png",
     "static/media/promotion.png": "/timetable/static/media/promotion.40fcd5d6.png",
-    "static/media/security.png": "/timetable/static/media/security.5d64bd88.png"
+    "static/media/App.css": "/timetable/static/media/search.4cbfcc8a.svg",
+    "static/media/security.png": "/timetable/static/media/security.5d64bd88.png",
+    "static/media/taxi.svg": "/timetable/static/media/taxi.57810376.svg",
+    "static/media/train.svg": "/timetable/static/media/train.a7ffe4d2.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.b0053ee1.js",
     "static/css/2.8aa5a7f8.chunk.css",
-    "static/js/2.2d70ca58.chunk.js",
-    "static/css/main.81815ef7.chunk.css",
-    "static/js/main.436ceaec.chunk.js"
+    "static/js/2.354e4b8e.chunk.js",
+    "static/css/main.5c39b919.chunk.css",
+    "static/js/main.a83688cc.chunk.js"
   ]
 }
